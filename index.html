@@ -37,7 +37,7 @@
     <meta property="og:title" content="浅岸的博客" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://example.org/" />
+<meta property="og:url" content="http://zkh176.github.io/" />
 
 <meta itemprop="name" content="浅岸的博客">
 <meta itemprop="description" content=""><meta name="twitter:card" content="summary"/>
@@ -118,52 +118,15 @@
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" class="color-inherit dim link">
-            HTML入门笔记
+          <a href="/posts/vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6/" class="color-inherit dim link">
+            Vue中的.sync修饰符
             </a>
         </h1>
         <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          1.HTML 是谁发明的。
-HTML是李爵士发明的。
-2.HTML 起手应该写什么。
-HTML的起手式的快捷键是！+TAB。表现出来的代码是
-&lt;!DOCTYPE html&gt; &lt;html lang=&#34;en&#34;&gt; &lt;head&gt;  &lt;meta charset=&#34;UTF-8&#34;&gt;  &lt;meta http-equiv=&#34;X-UA-Compatible&#34; content=&#34;IE=edge&#34;&gt;  &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1.0&#34;&gt;  &lt;title&gt;Document&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;/body&gt; &lt;/html&gt; 其中DOCTYPE html指的是文件类型是html；html lang=&ldquo;en&quot;指的是使用的语言是英文，改成中文的话把en改成zh-CN即可；文件的字符编码一定是UTF-8；title里面写的是网页的标题；其他的东西不要去改动他。
-3.常用的表章节的标签有哪些，分别是什么意思。
-常用的表章节的标签及意思分别是：
-标题：h1~h6
-章节：section
-文章：article
-段落：p
-头部：header
-脚部：footer
-主要内容：main
-旁支内容：aside
-划分：div
-4.全局属性有哪些。
-全局属性有以下的：
-class：给某个标签一个标记或者分类
-contenteditable：使任何一个元素可以被编辑
-hidden：加在标签里面可以让一个东西看不见
-id：不到万不得已，不要用ID，因为ID不报错
-style：每一个元素可以使用一个style元素，
-tabindex:代表按tab时响应的顺序，正数按从小到大的顺序，0是最后一个，负数代表不会到这个词条上。
-title：用来显示完整的内容。
-5.常用的内容标签有哪些，分别是什么意思。
-常用的内容标签及意思：
-ol+li:有序列表
-ul+li:无序列表
-dl+dt+dd：description list简称dl里面是用来描述的对象和内容
-pre：如果想要保留回车空格等，就用pre把内容包裹起来
-hr：做分割线用的
-br:用于强制换行
-a:用来超链接
-em:用来强调语气
-strong:用来强调内容本身
-code:用来在里面写代码
-quote:引用某个东西
-blockquote：可以换行的引用
+          为什么用.sync修饰符 当一个子组件改变了一个 prop 的值时，这个变化也会同步到父组件中所绑定。如果我们不用.sync，我们想做上面的那个弹窗功能，我们也可以props传初始值，然后事件监听，实现起来也不算复杂。这里用sync实现，只是给大家提供一个思路，让其明白他的实现原理，可能有其它复杂的功能适用sync。
+实例代码 &lt;div id=&#34;app&#34;&gt; &lt;div&gt;{{bar}}&lt;/div&gt; &lt;my-comp :foo.sync=&#34;bar&#34;&gt;&lt;/my-comp&gt; &lt;!-- &lt;my-comp :foo=&#34;bar&#34; @update:foo=&#34;val =&gt; bar = val&#34;&gt;&lt;/my-comp&gt; --&gt; &lt;/div&gt; &lt;script&gt; Vue.component(&#39;my-comp&#39;, { template: &#39;&lt;div @click=&#34;increment&#34;&gt;点我+1&lt;/div&gt;&#39;, data: function() { return {copyFoo: this.foo} }, props: [&#39;foo&#39;], methods: { increment: function() { this.$emit(&#39;update:foo&#39;, ++this.copyFoo); } } }); new Vue({ el: &#39;#app&#39;, data: {bar: 0} }); &lt;/script&gt; 代码会被扩展成&lt;comp :foo=&ldquo;bar&rdquo; @update:foo=&ldquo;val =&gt; bar = val&rdquo;&gt;，就是一个语法糖。
         </div>
-          <a href="/posts/html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+          <a href="/posts/vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
         
       </div>
     </div>
@@ -180,14 +143,48 @@ blockquote：可以换行的引用
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/%E5%BC%80%E5%8D%9A%E5%A4%A7%E5%90%89/" class="color-inherit dim link">
-            开博大吉
+          <a href="/posts/vue%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E7%90%86%E8%A7%A3%E7%AC%94%E8%AE%B0/" class="color-inherit dim link">
+            Vue响应式数据的理解笔记
             </a>
         </h1>
         <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          大家好 我的博客开通了，我会在这里分享一些笔记跟心得。
+          theme: scrolls-light 图片及部分文章参考出处
+响应式原理 数据响应式系统，其非侵入性的响应式系统，是vue最独特的特性之一。数据模型是被代理的JavaScript对象。而当修改它们的时候，视图就会进行更新。
+当你把一个普通的 JavaScript 对象传入 Vue 实例作为 data 选项，Vue 将遍历此对象所有的 property，并使用 Object.defineProperty 把这些 property 全部转为 getter/setter。Object.defineProperty 是 ES5 中一个无法 shim 的特性，这也就是 Vue 不支持 IE8 以及更低版本浏览器的原因。
+这些 getter/setter 对用户来说是不可见的，但是在内部它们让 Vue 能够追踪依赖，在 property 被访问和修改时通知变更。这里需要注意的是不同浏览器在控制台打印数据对象时对 getter/setter 的格式化并不同，所以建议安装 vue-devtools 来获取对检查数据更加友好的用户界面。
+每个组件实例都对应一个 watcher 实例，它会在组件渲染的过程中把“接触”过的数据 property 记录为依赖。之后当依赖项的 setter 触发时，会通知 watcher，从而使它关联的组件重新渲染
+由于 JavaScript 的限制，Vue 不能检测数组和对象的变化。尽管如此我们还是有一些办法来回避这些限制并保证它们的响应性
+getter和setter的用法 const obj3 = {  firstName: &#39;chen&#39;,  lastName: &#39;shanqiong&#39;,  get name() {  return this.firstName + this.
         </div>
-          <a href="/posts/%E5%BC%80%E5%8D%9A%E5%A4%A7%E5%90%89/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+          <a href="/posts/vue%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E7%90%86%E8%A7%A3%E7%AC%94%E8%AE%B0/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+          </div>
+        
+          <div class="relative w-100 mb4">
+            
+<article class="bb b--black-10">
+  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+    <div class="flex flex-column flex-row-ns">
+      
+      <div class="blah w-100">
+        <h1 class="f3 fw1 athelas mt0 lh-title">
+          <a href="/posts/%E6%B5%85%E6%9E%90vue/" class="color-inherit dim link">
+            浅析Vue
+            </a>
+        </h1>
+        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+          Vue的两个版本 vue有两个版本，分别是完整版（Vue.js）和非完整版（vue.runtime.js），两者的区别： 两个版本推荐使用非完整版，然后配合vue-loader和vue文件使用。
+template 和 render 怎么用 用template——html的方式做渲染 完整版的vue必须使用template。
+用创建一个加1的代码举例：
+new Vue({ data: { n: 0, }, template: ` &lt;div id=&#34;app&#34;&gt; &lt;p&gt;{{ n }}&lt;/p&gt; &lt;button @click=&#34;add&#34;&gt;+1&lt;/button&gt; &lt;/div&gt; `, methods: { add() { this.n += 1; }, }, }).$mount(&#39;#app&#39;); render——js的方式做渲染 非完整版需要用render写法，用 const h = creatElement创建一个标签。 用同样的代码举例：
+new Vue({ el:&#39;#app&#39;, data:{ n:0, }, //用js创建一段HTML render(h){ return h(&#39;div&#39;,[ this.n, h( &#39;button&#39;, { on:{ click:this.add, }, }, &#39;+1&#39;, ), ]); }, methods:{ add(){ this.n +=1; }, }, }); 有时候人在外面没电脑，但是急需要写个vue代码，怎么办呢？ 用codesandbox.
+        </div>
+          <a href="/posts/%E6%B5%85%E6%9E%90vue/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
         
       </div>
     </div>
@@ -199,6 +196,41 @@ blockquote：可以换行的引用
       </section>
 
       
+      <section class="w-100">
+        <h1 class="f3">More</h1>
+        
+        
+          <h2 class="f5 fw4 mb4 dib mr3">
+            <a href="/posts/mvc%E5%B0%8F%E7%BB%93/" class="link black dim">
+              MVC小结
+            </a>
+          </h2>
+        
+          <h2 class="f5 fw4 mb4 dib mr3">
+            <a href="/posts/%E6%B5%85%E6%9E%90jquery%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/" class="link black dim">
+              浅析jQuery设计思想
+            </a>
+          </h2>
+        
+          <h2 class="f5 fw4 mb4 dib mr3">
+            <a href="/posts/js%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A7%E8%A1%8C%E6%97%B6%E6%9C%BA/" class="link black dim">
+              JS函数的执行时机
+            </a>
+          </h2>
+        
+          <h2 class="f5 fw4 mb4 dib mr3">
+            <a href="/posts/js%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/" class="link black dim">
+              JaJS对象基本用法
+            </a>
+          </h2>
+        
+
+        
+        
+          <a href="/posts/" class="link db f6 pa2 br3 bg-mid-gray white dim w4 tc">All Posts</a>
+        
+        </section>
+      
 
       </div>
   
@@ -206,7 +238,7 @@ blockquote：可以换行的引用
     </main>
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://example.org/" >
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://zkh176.github.io/" >
     &copy;  浅岸的博客 2022 
   </a>
     <div>

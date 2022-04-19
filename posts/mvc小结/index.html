@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>MVC小结 | 浅岸的博客</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="MVC三个对象分别做什么？ MVC（Model View Controller）是一种架构模式。分为M、V、C三个部分。
+M：model，数据层（数据模型），负责操作所有的数据。
+V：view，视图层，负责所有UI界面，是提供给用户的操作界面，是程序的外壳。
+C：controller，控制层，负责格局用户从“视图层”输入指令，选取“数据层中的数据”，对其进行相应的操作（绑定事件等），然后产生最终结果。
+这三层是紧密联系在一起的，但是又相互独立，每一层内部的变化不影响其他层。每一层都对外提供接口，供上面一层调用。
+这样一来，软件就可以实现模块化，修改外观或者变更数据都不用修改其他层，大大方便了维护和升级。
+关于MVC，事实上没有一个明确的定义，每个前端对其理解都会有些许偏差，我理解的MVC是将代码结构化的一种抽象的概念，比如说：
+Model数据层 //示例 let Model = { data: { 数据源 }, create: { 增加数据 }, delete: { 删除数据 }, update(data) { Object.assign(m.data, data); //用新数据替换旧数据 eventBus.trigger(&#34;m:update&#34;); //eventBus触发&#39;m:update&#39;信息，通知View刷新界面 }, get: { 获取数据 }, }; View视图层 //示例 let View={ el:要刷新的元素， html：&#39;要显示在页面上的刷新内容&#39; init(){ v.el:初始化需要刷新的元素 }， render(){ 刷新页面 } } Controller控制层 let Controller={ init(){ v.init()//初始化View v.render()//第一次渲染页面 c.autoBindEvents()//自动的事件绑定 eventBus.on(&#39;m:update&#39;,()=&gt;{v.render()}//当enentsBus触发&#39;m:update&#39;是View刷新 }， events:{事件以哈希表的方式记录存储}, //例如： events: { &#39;click #add1&#39;: &#39;add&#39;, &#39;click #minus1&#39;: &#39;minus&#39;, &#39;click #mul2&#39;: &#39;mul&#39;, &#39;click #divide2&#39;: &#39;div&#39;, }, add() { m.">
+    <meta name="generator" content="Hugo 0.97.3" />
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="MVC小结" />
+<meta property="og:description" content="MVC三个对象分别做什么？ MVC（Model View Controller）是一种架构模式。分为M、V、C三个部分。
+M：model，数据层（数据模型），负责操作所有的数据。
+V：view，视图层，负责所有UI界面，是提供给用户的操作界面，是程序的外壳。
+C：controller，控制层，负责格局用户从“视图层”输入指令，选取“数据层中的数据”，对其进行相应的操作（绑定事件等），然后产生最终结果。
+这三层是紧密联系在一起的，但是又相互独立，每一层内部的变化不影响其他层。每一层都对外提供接口，供上面一层调用。
+这样一来，软件就可以实现模块化，修改外观或者变更数据都不用修改其他层，大大方便了维护和升级。
+关于MVC，事实上没有一个明确的定义，每个前端对其理解都会有些许偏差，我理解的MVC是将代码结构化的一种抽象的概念，比如说：
+Model数据层 //示例 let Model = { data: { 数据源 }, create: { 增加数据 }, delete: { 删除数据 }, update(data) { Object.assign(m.data, data); //用新数据替换旧数据 eventBus.trigger(&#34;m:update&#34;); //eventBus触发&#39;m:update&#39;信息，通知View刷新界面 }, get: { 获取数据 }, }; View视图层 //示例 let View={ el:要刷新的元素， html：&#39;要显示在页面上的刷新内容&#39; init(){ v.el:初始化需要刷新的元素 }， render(){ 刷新页面 } } Controller控制层 let Controller={ init(){ v.init()//初始化View v.render()//第一次渲染页面 c.autoBindEvents()//自动的事件绑定 eventBus.on(&#39;m:update&#39;,()=&gt;{v.render()}//当enentsBus触发&#39;m:update&#39;是View刷新 }， events:{事件以哈希表的方式记录存储}, //例如： events: { &#39;click #add1&#39;: &#39;add&#39;, &#39;click #minus1&#39;: &#39;minus&#39;, &#39;click #mul2&#39;: &#39;mul&#39;, &#39;click #divide2&#39;: &#39;div&#39;, }, add() { m." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://zkh176.github.io/posts/mvc%E5%B0%8F%E7%BB%93/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-19T17:44:55+08:00" />
+<meta property="article:modified_time" content="2022-04-19T17:44:55+08:00" />
+
+<meta itemprop="name" content="MVC小结">
+<meta itemprop="description" content="MVC三个对象分别做什么？ MVC（Model View Controller）是一种架构模式。分为M、V、C三个部分。
+M：model，数据层（数据模型），负责操作所有的数据。
+V：view，视图层，负责所有UI界面，是提供给用户的操作界面，是程序的外壳。
+C：controller，控制层，负责格局用户从“视图层”输入指令，选取“数据层中的数据”，对其进行相应的操作（绑定事件等），然后产生最终结果。
+这三层是紧密联系在一起的，但是又相互独立，每一层内部的变化不影响其他层。每一层都对外提供接口，供上面一层调用。
+这样一来，软件就可以实现模块化，修改外观或者变更数据都不用修改其他层，大大方便了维护和升级。
+关于MVC，事实上没有一个明确的定义，每个前端对其理解都会有些许偏差，我理解的MVC是将代码结构化的一种抽象的概念，比如说：
+Model数据层 //示例 let Model = { data: { 数据源 }, create: { 增加数据 }, delete: { 删除数据 }, update(data) { Object.assign(m.data, data); //用新数据替换旧数据 eventBus.trigger(&#34;m:update&#34;); //eventBus触发&#39;m:update&#39;信息，通知View刷新界面 }, get: { 获取数据 }, }; View视图层 //示例 let View={ el:要刷新的元素， html：&#39;要显示在页面上的刷新内容&#39; init(){ v.el:初始化需要刷新的元素 }， render(){ 刷新页面 } } Controller控制层 let Controller={ init(){ v.init()//初始化View v.render()//第一次渲染页面 c.autoBindEvents()//自动的事件绑定 eventBus.on(&#39;m:update&#39;,()=&gt;{v.render()}//当enentsBus触发&#39;m:update&#39;是View刷新 }， events:{事件以哈希表的方式记录存储}, //例如： events: { &#39;click #add1&#39;: &#39;add&#39;, &#39;click #minus1&#39;: &#39;minus&#39;, &#39;click #mul2&#39;: &#39;mul&#39;, &#39;click #divide2&#39;: &#39;div&#39;, }, add() { m."><meta itemprop="datePublished" content="2022-04-19T17:44:55+08:00" />
+<meta itemprop="dateModified" content="2022-04-19T17:44:55+08:00" />
+<meta itemprop="wordCount" content="187">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MVC小结"/>
+<meta name="twitter:description" content="MVC三个对象分别做什么？ MVC（Model View Controller）是一种架构模式。分为M、V、C三个部分。
+M：model，数据层（数据模型），负责操作所有的数据。
+V：view，视图层，负责所有UI界面，是提供给用户的操作界面，是程序的外壳。
+C：controller，控制层，负责格局用户从“视图层”输入指令，选取“数据层中的数据”，对其进行相应的操作（绑定事件等），然后产生最终结果。
+这三层是紧密联系在一起的，但是又相互独立，每一层内部的变化不影响其他层。每一层都对外提供接口，供上面一层调用。
+这样一来，软件就可以实现模块化，修改外观或者变更数据都不用修改其他层，大大方便了维护和升级。
+关于MVC，事实上没有一个明确的定义，每个前端对其理解都会有些许偏差，我理解的MVC是将代码结构化的一种抽象的概念，比如说：
+Model数据层 //示例 let Model = { data: { 数据源 }, create: { 增加数据 }, delete: { 删除数据 }, update(data) { Object.assign(m.data, data); //用新数据替换旧数据 eventBus.trigger(&#34;m:update&#34;); //eventBus触发&#39;m:update&#39;信息，通知View刷新界面 }, get: { 获取数据 }, }; View视图层 //示例 let View={ el:要刷新的元素， html：&#39;要显示在页面上的刷新内容&#39; init(){ v.el:初始化需要刷新的元素 }， render(){ 刷新页面 } } Controller控制层 let Controller={ init(){ v.init()//初始化View v.render()//第一次渲染页面 c.autoBindEvents()//自动的事件绑定 eventBus.on(&#39;m:update&#39;,()=&gt;{v.render()}//当enentsBus触发&#39;m:update&#39;是View刷新 }， events:{事件以哈希表的方式记录存储}, //例如： events: { &#39;click #add1&#39;: &#39;add&#39;, &#39;click #minus1&#39;: &#39;minus&#39;, &#39;click #mul2&#39;: &#39;mul&#39;, &#39;click #divide2&#39;: &#39;div&#39;, }, add() { m."/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        浅岸的博客
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      
+<div class="ananke-socials">
+  
+</div>
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        POSTS
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">MVC小结</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2022-04-19T17:44:55+08:00">April 19, 2022</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h1 id="mvc三个对象分别做什么">MVC三个对象分别做什么？</h1>
+<p><strong>MVC（Model View Controller）是一种架构模式。分为M、V、C三个部分。</strong></p>
+<p><strong>M：model，数据层（数据模型），负责操作所有的数据。</strong></p>
+<p><strong>V：view，视图层，负责所有UI界面，是提供给用户的操作界面，是程序的外壳。</strong></p>
+<p><strong>C：controller，控制层，负责格局用户从“视图层”输入指令，选取“数据层中的数据”，对其进行相应的操作（绑定事件等），然后产生最终结果。</strong></p>
+<p>这三层是紧密联系在一起的，但是又相互独立，每一层内部的变化不影响其他层。每一层都对外提供接口，供上面一层调用。</p>
+<p>这样一来，软件就可以实现模块化，修改外观或者变更数据都不用修改其他层，大大方便了维护和升级。</p>
+<p>关于MVC，事实上没有一个明确的定义，每个前端对其理解都会有些许偏差，我理解的MVC是将代码结构化的一种抽象的概念，比如说：</p>
+<h2 id="model数据层">Model数据层</h2>
+<pre tabindex="0"><code>//示例
+let Model = {
+  data: { 数据源 },
+  create: { 增加数据 },
+  delete: { 删除数据 },
+  update(data) {
+    Object.assign(m.data, data); //用新数据替换旧数据
+    eventBus.trigger(&#34;m:update&#34;); //eventBus触发&#39;m:update&#39;信息，通知View刷新界面
+  },
+  get: { 获取数据 },
+};
+</code></pre><h2 id="view视图层">View视图层</h2>
+<pre tabindex="0"><code>//示例
+let View={
+    el:要刷新的元素，
+    html：&#39;要显示在页面上的刷新内容&#39;
+    init(){
+        v.el:初始化需要刷新的元素
+    }，
+    render(){
+        刷新页面
+    }
+}
+</code></pre><h2 id="controller控制层">Controller控制层</h2>
+<pre tabindex="0"><code>let Controller={
+    init(){
+        v.init()//初始化View
+        v.render()//第一次渲染页面
+        c.autoBindEvents()//自动的事件绑定
+        eventBus.on(&#39;m:update&#39;,()=&gt;{v.render()}//当enentsBus触发&#39;m:update&#39;是View刷新
+    }，
+    events:{事件以哈希表的方式记录存储},
+    //例如：
+   events: {
+    &#39;click #add1&#39;: &#39;add&#39;,
+    &#39;click #minus1&#39;: &#39;minus&#39;,
+    &#39;click #mul2&#39;: &#39;mul&#39;,
+    &#39;click #divide2&#39;: &#39;div&#39;,
+    },
+    add() {
+      m.update({n: m.data.n + 1})
+    },
+    minus() {
+      m.update({n: m.data.n - 1})
+    },
+    mul() {
+      m.update({n: m.data.n * 2})
+    },
+    div() {
+      m.update({n: m.data.n / 2})
+    },
+    method(){
+        data=新数据
+        m.update(data) // controller 通知 model去更新数据
+    },
+    autoBindEvents(){
+    	for (let key in c.events) { // 遍历events表，然后自动绑定事件
+      const value = c[c.events[key]]
+      const spaceIndex = key.indexOf(&#39; &#39;)
+      const part1 = key.slice(0, spaceIndex) // 拿到 &#39;click&#39;
+      const part2 = key.slice(spaceIndex + 1)  // 拿到&#39;#add1&#39;
+      v.el.on(part1, part2, value)
+    }
+}
+</code></pre><h1 id="eventbus-有哪些-api是做什么用的">EventBus 有哪些 API，是做什么用的</h1>
+<p><strong>前面提到MVC三层是紧密联系在一起的，又互相独立的，每一层内部的变化不影响其它层。当层与层之间需要通信时，这时就需要EventBus，它主要用于组件之间的监听与通信。</strong></p>
+<pre tabindex="0"><code>eventBus.trigger(&#39;m:updated&#39;) //触发事件 
+
+eventBus.on(&#39;m:updated&#39;,()=&gt;{ //监听事件
+     v.render(m.data.n)
+ })
+ eventBus.off(&#39;m:updated&#39;)//取消监听
+</code></pre><h1 id="表驱动编程是做什么的">表驱动编程是做什么的？</h1>
+<h2 id="为什么会出现表驱动编程">为什么会出现表驱动编程？</h2>
+<p>随着逻辑复杂性的增加，if/else或switch中的代码变得越来越臃肿，代码可读性不强，所谓的表驱动程序，指的是把一大堆的if&hellip;else&hellip;这样的逻辑进行处理，从而转化成从一个hash表中查找kry&ndash;value对的过程。</p>
+<h1 id="模块化的理解">模块化的理解</h1>
+<h2 id="这里的模块化指的是前端模块化模块化也是mvc的重要前提它把相对独立的代码从一大段代码里抽取成一个个小模块每个模块之间相对独立这样也方便日后的维护">这里的模块化指的是前端模块化，模块化也是MVC的重要前提。它把相对独立的代码从一大段代码里抽取成一个个小模块，每个模块之间相对独立，这样也方便日后的维护。</h2>
+<p>ES6的语法里引入了import和export，就是用来实现模块化：</p>
+<pre tabindex="0"><code>export default c; // 默认导出
+export { c }; // 另外一种导出方式。记得要加花括号
+</code></pre><h1 id="划分模块的一个准则是高内聚低耦合">划分模块的一个准则是「高内聚、低耦合」</h1>
+<p><strong>高内聚</strong>，是指一个软件模块是由相关性很强的代码组成，只负责一项任务，也就是常说的单一责任原则。</p>
+<p><strong>低耦合</strong>，是指模块之间的联系越少越好，接口越简单越好，实现低耦合，细线通信。</p>
+<p>如果各个模块之间接口很复杂，说明功能划分有不合理之处、模块之间的耦合太高，同时也说明单个模块的内聚不高。</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://zkh176.github.io/" >
+    &copy;  浅岸的博客 2022 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+</div></div>
+  </div>
+</footer>
+
+  </body>
+</html>
