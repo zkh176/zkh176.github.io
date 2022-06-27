@@ -1,124 +1,88 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    
-    <title>Vue中的.sync修饰符 | 浅岸的博客</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="为什么用.sync修饰符 当一个子组件改变了一个 prop 的值时，这个变化也会同步到父组件中所绑定。如果我们不用.sync，我们想做上面的那个弹窗功能，我们也可以props传初始值，然后事件监听，实现起来也不算复杂。这里用sync实现，只是给大家提供一个思路，让其明白他的实现原理，可能有其它复杂的功能适用sync。
-实例代码 &lt;div id=&#34;app&#34;&gt; &lt;div&gt;{{bar}}&lt;/div&gt; &lt;my-comp :foo.sync=&#34;bar&#34;&gt;&lt;/my-comp&gt; &lt;!-- &lt;my-comp :foo=&#34;bar&#34; @update:foo=&#34;val =&gt; bar = val&#34;&gt;&lt;/my-comp&gt; --&gt; &lt;/div&gt; &lt;script&gt; Vue.component(&#39;my-comp&#39;, { template: &#39;&lt;div @click=&#34;increment&#34;&gt;点我&#43;1&lt;/div&gt;&#39;, data: function() { return {copyFoo: this.foo} }, props: [&#39;foo&#39;], methods: { increment: function() { this.$emit(&#39;update:foo&#39;, &#43;&#43;this.copyFoo); } } }); new Vue({ el: &#39;#app&#39;, data: {bar: 0} }); &lt;/script&gt; 代码会被扩展成&lt;comp :foo=&ldquo;bar&rdquo; @update:foo=&ldquo;val =&gt; bar = val&rdquo;&gt;，就是一个语法糖。">
-    <meta name="generator" content="Hugo 0.97.3" />
-    
-    
-    
-    
-      <meta name="robots" content="noindex, nofollow">
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-    
-    
-    
-      
-
-    
-
-    
-    
-    <meta property="og:title" content="Vue中的.sync修饰符" />
-<meta property="og:description" content="为什么用.sync修饰符 当一个子组件改变了一个 prop 的值时，这个变化也会同步到父组件中所绑定。如果我们不用.sync，我们想做上面的那个弹窗功能，我们也可以props传初始值，然后事件监听，实现起来也不算复杂。这里用sync实现，只是给大家提供一个思路，让其明白他的实现原理，可能有其它复杂的功能适用sync。
-实例代码 &lt;div id=&#34;app&#34;&gt; &lt;div&gt;{{bar}}&lt;/div&gt; &lt;my-comp :foo.sync=&#34;bar&#34;&gt;&lt;/my-comp&gt; &lt;!-- &lt;my-comp :foo=&#34;bar&#34; @update:foo=&#34;val =&gt; bar = val&#34;&gt;&lt;/my-comp&gt; --&gt; &lt;/div&gt; &lt;script&gt; Vue.component(&#39;my-comp&#39;, { template: &#39;&lt;div @click=&#34;increment&#34;&gt;点我&#43;1&lt;/div&gt;&#39;, data: function() { return {copyFoo: this.foo} }, props: [&#39;foo&#39;], methods: { increment: function() { this.$emit(&#39;update:foo&#39;, &#43;&#43;this.copyFoo); } } }); new Vue({ el: &#39;#app&#39;, data: {bar: 0} }); &lt;/script&gt; 代码会被扩展成&lt;comp :foo=&ldquo;bar&rdquo; @update:foo=&ldquo;val =&gt; bar = val&rdquo;&gt;，就是一个语法糖。" />
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Vue中的.sync修饰符 - 浅岸的博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Vue中的.sync修饰符" />
+<meta property="og:description" content="为什么用.sync修饰符 当一个子组件改变了一个 prop 的值时，这个变化也会同步到父组件中所绑定。如果我们不用.sync，我们想做上面的那个弹窗功能" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zkh176.github.io/posts/vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="http://example.org/posts/vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-19T17:47:42+08:00" />
-<meta property="article:modified_time" content="2022-04-19T17:47:42+08:00" />
+<meta property="article:modified_time" content="2022-04-19T17:47:42+08:00" /><meta property="og:site_name" content="My cool site" />
 
-<meta itemprop="name" content="Vue中的.sync修饰符">
-<meta itemprop="description" content="为什么用.sync修饰符 当一个子组件改变了一个 prop 的值时，这个变化也会同步到父组件中所绑定。如果我们不用.sync，我们想做上面的那个弹窗功能，我们也可以props传初始值，然后事件监听，实现起来也不算复杂。这里用sync实现，只是给大家提供一个思路，让其明白他的实现原理，可能有其它复杂的功能适用sync。
-实例代码 &lt;div id=&#34;app&#34;&gt; &lt;div&gt;{{bar}}&lt;/div&gt; &lt;my-comp :foo.sync=&#34;bar&#34;&gt;&lt;/my-comp&gt; &lt;!-- &lt;my-comp :foo=&#34;bar&#34; @update:foo=&#34;val =&gt; bar = val&#34;&gt;&lt;/my-comp&gt; --&gt; &lt;/div&gt; &lt;script&gt; Vue.component(&#39;my-comp&#39;, { template: &#39;&lt;div @click=&#34;increment&#34;&gt;点我&#43;1&lt;/div&gt;&#39;, data: function() { return {copyFoo: this.foo} }, props: [&#39;foo&#39;], methods: { increment: function() { this.$emit(&#39;update:foo&#39;, &#43;&#43;this.copyFoo); } } }); new Vue({ el: &#39;#app&#39;, data: {bar: 0} }); &lt;/script&gt; 代码会被扩展成&lt;comp :foo=&ldquo;bar&rdquo; @update:foo=&ldquo;val =&gt; bar = val&rdquo;&gt;，就是一个语法糖。"><meta itemprop="datePublished" content="2022-04-19T17:47:42+08:00" />
-<meta itemprop="dateModified" content="2022-04-19T17:47:42+08:00" />
-<meta itemprop="wordCount" content="61">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Vue中的.sync修饰符"/>
-<meta name="twitter:description" content="为什么用.sync修饰符 当一个子组件改变了一个 prop 的值时，这个变化也会同步到父组件中所绑定。如果我们不用.sync，我们想做上面的那个弹窗功能，我们也可以props传初始值，然后事件监听，实现起来也不算复杂。这里用sync实现，只是给大家提供一个思路，让其明白他的实现原理，可能有其它复杂的功能适用sync。
-实例代码 &lt;div id=&#34;app&#34;&gt; &lt;div&gt;{{bar}}&lt;/div&gt; &lt;my-comp :foo.sync=&#34;bar&#34;&gt;&lt;/my-comp&gt; &lt;!-- &lt;my-comp :foo=&#34;bar&#34; @update:foo=&#34;val =&gt; bar = val&#34;&gt;&lt;/my-comp&gt; --&gt; &lt;/div&gt; &lt;script&gt; Vue.component(&#39;my-comp&#39;, { template: &#39;&lt;div @click=&#34;increment&#34;&gt;点我&#43;1&lt;/div&gt;&#39;, data: function() { return {copyFoo: this.foo} }, props: [&#39;foo&#39;], methods: { increment: function() { this.$emit(&#39;update:foo&#39;, &#43;&#43;this.copyFoo); } } }); new Vue({ el: &#39;#app&#39;, data: {bar: 0} }); &lt;/script&gt; 代码会被扩展成&lt;comp :foo=&ldquo;bar&rdquo; @update:foo=&ldquo;val =&gt; bar = val&rdquo;&gt;，就是一个语法糖。"/>
+<meta name="twitter:description" content="为什么用.sync修饰符 当一个子组件改变了一个 prop 的值时，这个变化也会同步到父组件中所绑定。如果我们不用.sync，我们想做上面的那个弹窗功能"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6/" /><link rel="prev" href="http://example.org/posts/vue%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E7%90%86%E8%A7%A3%E7%AC%94%E8%AE%B0/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Vue中的.sync修饰符",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6\/"
+        },"genre": "posts","wordcount":  300 ,
+        "url": "http:\/\/example.org\/posts\/vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6\/","datePublished": "2022-04-19T17:47:42+08:00","dateModified": "2022-04-19T17:47:42+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "浅岸"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
-	
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-
-    
-   
-  
-
-  <header>
-    <div class="bg-black">
-      <nav class="pv3 ph3 ph4-ns" role="navigation">
-  <div class="flex-l justify-between items-center center">
-    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
-      
-        浅岸的博客
-      
-    </a>
-    <div class="flex-l items-center">
-      
-
-      
-      
-<div class="ananke-socials">
-  
-</div>
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="浅岸的博客">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
-</nav>
-
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="浅岸的博客">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
     </div>
-  </header>
-
-
-
-    <main class="pb7" role="main">
-      
-  
-  <article class="flex-l flex-wrap justify-between mw8 center ph3">
-    <header class="mt4 w-100">
-      <aside class="instapaper_ignoref b helvetica tracked">
-          
-        POSTS
-      </aside>
-      
-
-
-
-
-
-
-
-
-
-
-  <div id="sharing" class="mt3 ananke-socials">
-    
-  </div>
-
-
-      <h1 class="f1 athelas mt3 mb1">Vue中的.sync修饰符</h1>
-      
-      
-      
-      <time class="f6 mv4 dib tracked" datetime="2022-04-19T17:47:42+08:00">April 19, 2022</time>
-      
-
-      
-      
-    </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h1 id="为什么用sync修饰符">为什么用.sync修饰符</h1>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Vue中的.sync修饰符</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>浅岸</a>
+</span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-04-19">2022-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;300 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#实例代码">实例代码</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="为什么用sync修饰符">为什么用.sync修饰符</h1>
 <p>当一个子组件改变了一个 prop 的值时，这个变化也会同步到父组件中所绑定。如果我们不用.sync，我们想做上面的那个弹窗功能，我们也可以props传初始值，然后事件监听，实现起来也不算复杂。这里用sync实现，只是给大家提供一个思路，让其明白他的实现原理，可能有其它复杂的功能适用sync。</p>
 <h2 id="实例代码">实例代码</h2>
 <pre tabindex="0"><code>&lt;div id=&#34;app&#34;&gt;
@@ -145,36 +109,40 @@
     });
 &lt;/script&gt;
 </code></pre><p>代码<!-- raw HTML omitted --><!-- raw HTML omitted -->会被扩展成&lt;comp :foo=&ldquo;bar&rdquo; @update:foo=&ldquo;val =&gt; bar = val&rdquo;&gt;<!-- raw HTML omitted -->，就是一个语法糖。</p>
-<ul class="pa0">
-  
-</ul>
-<div class="mt6 instapaper_ignoref">
-      
-      
-      </div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-04-19</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6/" data-title="Vue中的.sync修饰符"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6/" data-title="Vue中的.sync修饰符"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6/" data-title="Vue中的.sync修饰符"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@6.20.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6/" data-title="Vue中的.sync修饰符"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
     </div>
 
-    <aside class="w-30-l mt6-l">
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
 
+    <div class="post-nav"><a href="/posts/vue%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E7%90%86%E8%A7%A3%E7%AC%94%E8%AE%B0/" class="prev" rel="prev" title="Vue响应式数据的理解笔记"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Vue响应式数据的理解笔记</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.97.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">浅岸</a></span></div>
+        </div>
+    </footer></div>
 
-
-
-</aside>
-
-  </article>
-
-    </main>
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://zkh176.github.io/" >
-    &copy;  浅岸的博客 2022 
-  </a>
-    <div>
-<div class="ananke-socials">
-  
-</div></div>
-  </div>
-</footer>
-
-  </body>
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.1/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

@@ -1,311 +1,89 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>浅岸的博客</title>
-    <link>http://zkh176.github.io/</link>
-    <description>Recent content on 浅岸的博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-Hans</language>
-    <lastBuildDate>Tue, 19 Apr 2022 17:47:42 +0800</lastBuildDate><atom:link href="http://zkh176.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Vue中的.sync修饰符</title>
-      <link>http://zkh176.github.io/posts/vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6/</link>
-      <pubDate>Tue, 19 Apr 2022 17:47:42 +0800</pubDate>
-      
-      <guid>http://zkh176.github.io/posts/vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6/</guid>
-      <description>为什么用.sync修饰符 当一个子组件改变了一个 prop 的值时，这个变化也会同步到父组件中所绑定。如果我们不用.sync，我们想做上面的那个弹窗功能，我们也可以props传初始值，然后事件监听，实现起来也不算复杂。这里用sync实现，只是给大家提供一个思路，让其明白他的实现原理，可能有其它复杂的功能适用sync。
-实例代码 &amp;lt;div id=&amp;#34;app&amp;#34;&amp;gt; &amp;lt;div&amp;gt;{{bar}}&amp;lt;/div&amp;gt; &amp;lt;my-comp :foo.sync=&amp;#34;bar&amp;#34;&amp;gt;&amp;lt;/my-comp&amp;gt; &amp;lt;!-- &amp;lt;my-comp :foo=&amp;#34;bar&amp;#34; @update:foo=&amp;#34;val =&amp;gt; bar = val&amp;#34;&amp;gt;&amp;lt;/my-comp&amp;gt; --&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;script&amp;gt; Vue.component(&amp;#39;my-comp&amp;#39;, { template: &amp;#39;&amp;lt;div @click=&amp;#34;increment&amp;#34;&amp;gt;点我+1&amp;lt;/div&amp;gt;&amp;#39;, data: function() { return {copyFoo: this.foo} }, props: [&amp;#39;foo&amp;#39;], methods: { increment: function() { this.$emit(&amp;#39;update:foo&amp;#39;, ++this.copyFoo); } } }); new Vue({ el: &amp;#39;#app&amp;#39;, data: {bar: 0} }); &amp;lt;/script&amp;gt; 代码会被扩展成&amp;lt;comp :foo=&amp;ldquo;bar&amp;rdquo; @update:foo=&amp;ldquo;val =&amp;gt; bar = val&amp;rdquo;&amp;gt;，就是一个语法糖。</description>
-    </item>
-    
-    <item>
-      <title>Vue响应式数据的理解笔记</title>
-      <link>http://zkh176.github.io/posts/vue%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E7%90%86%E8%A7%A3%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Tue, 19 Apr 2022 17:47:17 +0800</pubDate>
-      
-      <guid>http://zkh176.github.io/posts/vue%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E7%90%86%E8%A7%A3%E7%AC%94%E8%AE%B0/</guid>
-      <description>theme: scrolls-light 图片及部分文章参考出处
-响应式原理 数据响应式系统，其非侵入性的响应式系统，是vue最独特的特性之一。数据模型是被代理的JavaScript对象。而当修改它们的时候，视图就会进行更新。
-当你把一个普通的 JavaScript 对象传入 Vue 实例作为 data 选项，Vue 将遍历此对象所有的 property，并使用 Object.defineProperty 把这些 property 全部转为 getter/setter。Object.defineProperty 是 ES5 中一个无法 shim 的特性，这也就是 Vue 不支持 IE8 以及更低版本浏览器的原因。
-这些 getter/setter 对用户来说是不可见的，但是在内部它们让 Vue 能够追踪依赖，在 property 被访问和修改时通知变更。这里需要注意的是不同浏览器在控制台打印数据对象时对 getter/setter 的格式化并不同，所以建议安装 vue-devtools 来获取对检查数据更加友好的用户界面。
-每个组件实例都对应一个 watcher 实例，它会在组件渲染的过程中把“接触”过的数据 property 记录为依赖。之后当依赖项的 setter 触发时，会通知 watcher，从而使它关联的组件重新渲染
-由于 JavaScript 的限制，Vue 不能检测数组和对象的变化。尽管如此我们还是有一些办法来回避这些限制并保证它们的响应性
-getter和setter的用法 const obj3 = {  firstName: &amp;#39;chen&amp;#39;,  lastName: &amp;#39;shanqiong&amp;#39;,  get name() {  return this.firstName + this.</description>
-    </item>
-    
-    <item>
-      <title>浅析Vue</title>
-      <link>http://zkh176.github.io/posts/%E6%B5%85%E6%9E%90vue/</link>
-      <pubDate>Tue, 19 Apr 2022 17:46:43 +0800</pubDate>
-      
-      <guid>http://zkh176.github.io/posts/%E6%B5%85%E6%9E%90vue/</guid>
-      <description>Vue的两个版本 vue有两个版本，分别是完整版（Vue.js）和非完整版（vue.runtime.js），两者的区别： 两个版本推荐使用非完整版，然后配合vue-loader和vue文件使用。
-template 和 render 怎么用 用template——html的方式做渲染 完整版的vue必须使用template。
-用创建一个加1的代码举例：
-new Vue({ data: { n: 0, }, template: ` &amp;lt;div id=&amp;#34;app&amp;#34;&amp;gt; &amp;lt;p&amp;gt;{{ n }}&amp;lt;/p&amp;gt; &amp;lt;button @click=&amp;#34;add&amp;#34;&amp;gt;+1&amp;lt;/button&amp;gt; &amp;lt;/div&amp;gt; `, methods: { add() { this.n += 1; }, }, }).$mount(&amp;#39;#app&amp;#39;); render——js的方式做渲染 非完整版需要用render写法，用 const h = creatElement创建一个标签。 用同样的代码举例：
-new Vue({ el:&amp;#39;#app&amp;#39;, data:{ n:0, }, //用js创建一段HTML render(h){ return h(&amp;#39;div&amp;#39;,[ this.n, h( &amp;#39;button&amp;#39;, { on:{ click:this.add, }, }, &amp;#39;+1&amp;#39;, ), ]); }, methods:{ add(){ this.n +=1; }, }, }); 有时候人在外面没电脑，但是急需要写个vue代码，怎么办呢？ 用codesandbox.</description>
-    </item>
-    
-    <item>
-      <title>MVC小结</title>
-      <link>http://zkh176.github.io/posts/mvc%E5%B0%8F%E7%BB%93/</link>
-      <pubDate>Tue, 19 Apr 2022 17:44:55 +0800</pubDate>
-      
-      <guid>http://zkh176.github.io/posts/mvc%E5%B0%8F%E7%BB%93/</guid>
-      <description>MVC三个对象分别做什么？ MVC（Model View Controller）是一种架构模式。分为M、V、C三个部分。
-M：model，数据层（数据模型），负责操作所有的数据。
-V：view，视图层，负责所有UI界面，是提供给用户的操作界面，是程序的外壳。
-C：controller，控制层，负责格局用户从“视图层”输入指令，选取“数据层中的数据”，对其进行相应的操作（绑定事件等），然后产生最终结果。
-这三层是紧密联系在一起的，但是又相互独立，每一层内部的变化不影响其他层。每一层都对外提供接口，供上面一层调用。
-这样一来，软件就可以实现模块化，修改外观或者变更数据都不用修改其他层，大大方便了维护和升级。
-关于MVC，事实上没有一个明确的定义，每个前端对其理解都会有些许偏差，我理解的MVC是将代码结构化的一种抽象的概念，比如说：
-Model数据层 //示例 let Model = { data: { 数据源 }, create: { 增加数据 }, delete: { 删除数据 }, update(data) { Object.assign(m.data, data); //用新数据替换旧数据 eventBus.trigger(&amp;#34;m:update&amp;#34;); //eventBus触发&amp;#39;m:update&amp;#39;信息，通知View刷新界面 }, get: { 获取数据 }, }; View视图层 //示例 let View={ el:要刷新的元素， html：&amp;#39;要显示在页面上的刷新内容&amp;#39; init(){ v.el:初始化需要刷新的元素 }， render(){ 刷新页面 } } Controller控制层 let Controller={ init(){ v.init()//初始化View v.render()//第一次渲染页面 c.autoBindEvents()//自动的事件绑定 eventBus.on(&amp;#39;m:update&amp;#39;,()=&amp;gt;{v.render()}//当enentsBus触发&amp;#39;m:update&amp;#39;是View刷新 }， events:{事件以哈希表的方式记录存储}, //例如： events: { &amp;#39;click #add1&amp;#39;: &amp;#39;add&amp;#39;, &amp;#39;click #minus1&amp;#39;: &amp;#39;minus&amp;#39;, &amp;#39;click #mul2&amp;#39;: &amp;#39;mul&amp;#39;, &amp;#39;click #divide2&amp;#39;: &amp;#39;div&amp;#39;, }, add() { m.</description>
-    </item>
-    
-    <item>
-      <title>浅析jQuery设计思想</title>
-      <link>http://zkh176.github.io/posts/%E6%B5%85%E6%9E%90jquery%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</link>
-      <pubDate>Tue, 19 Apr 2022 17:44:23 +0800</pubDate>
-      
-      <guid>http://zkh176.github.io/posts/%E6%B5%85%E6%9E%90jquery%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</guid>
-      <description>学习了jQuery一段时间，对于jQuery的基本设计思想和主要用法的简单总结，就是“选择某个网页元素，然后对其进行简单的操作”。
-记录一下最近学习了之后大概总结的一些用法。
-jQuery如何获取元素  css选择器获取元素 $(document)//选择整个文档对象 $(&amp;#39;#myId&amp;#39;)//选择ID为myID的网页元素 $(&amp;#39;div.myClass&amp;#39;) // 选择class为myClass的div元素 $(&amp;#39;input[name=first]&amp;#39;) // 选择name属性等于first的input元素 jQuery特有的表达式获取元素 $(&amp;#39;a:first&amp;#39;) //选择网页中第一个a元素 $(&amp;#39;tr:odd&amp;#39;) //选择表格的奇数行 $(&amp;#39;#myForm :input&amp;#39;) // 选择表单中的input元素 $(&amp;#39;div:visible&amp;#39;) //选择可见的div元素 $(&amp;#39;div:gt(2)&amp;#39;) // 选择所有的div元素，除了前三个 $(&amp;#39;div:animated&amp;#39;) // 选择当前处于动画状态的div元素 jQuery的链式操作是怎样的  jQuery将最终选中的网页元素，对它进行一系列操作，并且所有的操作可以链接在一起，以链条的形式写出来，这就叫链式操作，比如：
-$(&amp;#39;.div&amp;#39;).addClass(&amp;#39;.red&amp;#39;).text().find(&amp;#39;h2&amp;#39;) 能这样操作的原因是每一步的jQuery操作，返回的都是一个jQuery对象，所以不同的操作可以连在一起，这是jQuery最令人称道，也是最方便的特点。
-jQuery还提供了.end()方法，使结果集可以后退一步： $(&amp;#39;div&amp;#39;) .find(&amp;#39;h3&amp;#39;) .eq(2) .html(&amp;#39;Hello&amp;#39;) **.end() //退回到选中所有的h3元素的那一步** .eq(0) //选中第一个h3元素 .html(&amp;#39;World&amp;#39;); //将它的内容改为World jQuery如何创建元素  $(&amp;#39;&amp;lt;div&amp;gt;被创建的元素&amp;lt;div&amp;gt;&amp;#39;) $(&amp;#39;&amp;lt;h2&amp;gt;被创建的元素&amp;lt;h2&amp;gt;&amp;#39;) $(&amp;#39;&amp;lt;div&amp;gt;&amp;lt;h2&amp;gt;被创建的元素&amp;lt;/h2&amp;gt;&amp;lt;div&amp;gt;&amp;#39;) jQuery如何移动元素  insertAfter()和.after()：在现存元素的外部，从后面插入元素 .insertBefore()和.before()：在现存元素的外部，从前面插入元素 .appendTo()和.append()：在现存元素的内部，从后面插入元素 .prependTo()和.prepend()：在现存元素的内部，从前面插入元素 jQuery如何修改元素的属性  　$(&amp;#39;h1&amp;#39;).html(); //html()没有参数，表示取出h1的值 $(&amp;#39;h1&amp;#39;).html(&amp;#39;Hello&amp;#39;); //html()有参数Hello，表示对h1进行赋值 也就是说，使用一个函数，来完成取值（getter）和赋值（setter）的两种操作。
-常见的取值和赋值函数如下：
- .html() 取出或设置html内容 .text() 取出或设置text内容 .</description>
-    </item>
-    
-    <item>
-      <title>JS函数的执行时机</title>
-      <link>http://zkh176.github.io/posts/js%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A7%E8%A1%8C%E6%97%B6%E6%9C%BA/</link>
-      <pubDate>Tue, 19 Apr 2022 17:42:22 +0800</pubDate>
-      
-      <guid>http://zkh176.github.io/posts/js%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A7%E8%A1%8C%E6%97%B6%E6%9C%BA/</guid>
-      <description>解释下为什么以下代码会打印 6 个 6 let i = 0 for(i = 0; i&amp;lt;6; i++){  setTimeout(()=&amp;gt;{  console.log(i)  },0) } 答案： 首先setTimeout的作用是等一会再执行打印，for循环会先进行执行，执行的最终结果为6，循环过程中i从0到6，一共执行了六次。因此打印结果为6个6。
-让这个代码打印出 0、1、2、3、4、5 的方法 for(let i = 0; i&amp;lt;6; i++){  setTimeout(()=&amp;gt;{  console.log(i)  },0) } 除了使用 for let 配合，还有什么其他方法可以打印出 0、1、2、3、4、5 找到了两种答案：
-for in let arr=[&amp;#39;a&amp;#39;,&amp;#39;d&amp;#39;,&amp;#39;e&amp;#39;,&amp;#39;f&amp;#39;,&amp;#39;g&amp;#39;,&amp;#39;q&amp;#39;] for(i in arr){  console.log(i) } 立即执行函数 let i = 0 for (i = 0;i &amp;lt; 6; i++){  !function (i) {  setTimeout(() =&amp;gt; {  console.</description>
-    </item>
-    
-    <item>
-      <title>JaJS对象基本用法</title>
-      <link>http://zkh176.github.io/posts/js%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</link>
-      <pubDate>Tue, 19 Apr 2022 17:41:50 +0800</pubDate>
-      
-      <guid>http://zkh176.github.io/posts/js%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</guid>
-      <description>1.声明对象的两种语法  对象的定义   无序的数据集合。 键值对的集合。   写法  1.正规的写法：let 对象名=new Object({&amp;lsquo;键名（属性名）&amp;rsquo;:&amp;lsquo;键值（属性值）&amp;rsquo;})
-let obj = new Object ({&amp;#39;name&amp;#39;:&amp;#39;xxx&amp;#39;}) 2.简易写法：
-let obj = {&amp;#39;name&amp;#39;:&amp;#39;xxx&amp;#39;,&amp;#39;age&amp;#39;:&amp;#39;xx&amp;#39;}  细节   键名是字符串，不是标识符，可以包含任意字符。 引号可以省略，省略之后就只能写标识符，但是数字也可以所谓开头。 就算引号省略了，键名还是字符串。没有数字键名，没有数字下标。   2.如何删除对象的属性  delete obj.xxx或delete obj[&amp;lsquo;xxx&amp;rsquo;]   即可删除obj的xxx属性。 请区分【属性名为undefined】和【不含属性名】  \
- 不含属性名  &amp;lsquo;xxx&amp;rsquo; in obj == false
-\
- 含有属性名，但是值为undefined  &amp;lsquo;xxx&amp;rsquo; in obj &amp;amp;&amp;amp; obj.xxx ===undefined
-\
- 注意obj.xxx === undefined  不能断定&amp;rsquo;xxx&amp;rsquo;是否为Obj的属性，要判断属性必须用in obj。</description>
-    </item>
-    
-    <item>
-      <title>JavaScript笔记——基本语法</title>
-      <link>http://zkh176.github.io/posts/javascript%E7%AC%94%E8%AE%B0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</link>
-      <pubDate>Tue, 19 Apr 2022 17:41:17 +0800</pubDate>
-      
-      <guid>http://zkh176.github.io/posts/javascript%E7%AC%94%E8%AE%B0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</guid>
-      <description>1.语句和表达式 JavaScript程序的执行单位为行，也就是一行一行地执行，一般情况下，每一行就是一个语句。
-语句是为了完成某种任务而进行的操作，比如：
-var a = 1 + 3 就是一行赋值语句，这条语句先用var命令，声明了变量a，然后将1+3的运算结果赋值给变量a。
-1+3叫做表达式，指一个为了得到返回值的计算式。语句和表达式的区别在于，前者主要为了进行某种操作，一般不需要返回值；而后者就是为了得到返回值，一定会返回一个值。
-语句以分号结尾，一个分号就表示一个语句结束，多个语句可以写在一行内；表达式不需要分号结尾，一旦在表达式后面添加分号，JavaScript就将表达式视为语句，这样会产生一些没有任何意义的语句。
- 2.标识符的规则 标识符指的是用来识别各种值的合法名称。最常见的标识符就是变量名，以及后面要提到的函数名。JavaScript 语言的标识符对大小写敏感，所以a和A是两个不同的标识符。
-规则：
- 第一个字符，可以使Unicode字母或者$或_或中文。 后面的字符，除了上面所说，还可以有数字。 一般标识符就是取名字的时候用到的符号。   3.if else 语句  语法   if(表达式）{语句1}else{语句2}。（意思是如果表达式成立，那么语句1就执行，如果表达式不成立，语句2就执行） {}在语句只有一句的时候可以省略，不过不建议这样做，容易出bug。  常用写法：
-if(表达式){ 语句 }else if (表达式){ 语句 }else{ 语句 }  4.while for 语句 while循环  语法  while(表达式){语句}
- 作用及运行   判断表达式的真假。 当表达式为真，执行语句，执行完再判断表达式的真假。 当表达式为假，执行后面的语句。  while(true){}是个死循环，不要用，用了会让浏览器崩溃。
-for循环  语法  for(语句1（var a = 0.1）；表达式2(a ! == 1)；语句3(a = a + 0.</description>
-    </item>
-    
-    <item>
-      <title>网景与JavaScript的历史</title>
-      <link>http://zkh176.github.io/posts/%E7%BD%91%E6%99%AF%E4%B8%8Ejavascript%E7%9A%84%E5%8E%86%E5%8F%B2/</link>
-      <pubDate>Tue, 19 Apr 2022 17:40:32 +0800</pubDate>
-      
-      <guid>http://zkh176.github.io/posts/%E7%BD%91%E6%99%AF%E4%B8%8Ejavascript%E7%9A%84%E5%8E%86%E5%8F%B2/</guid>
-      <description>起始 JavaScript，一个1995年的网景公司基于为了给公司的浏览器嵌入一个可以与JAVA搭配使用的辅助脚本语言，而在十天做出来的一款网页脚本，却没想到在之后的二十几年里慢慢成为了世界前端史上很重要的一个事情。
-在1995年，JavaScript之父Brendan Eich（下称布兰登·艾克）入职网景公司，最开始的目标其实是把Scheme语言嵌入到网景浏览器里，但是，由于公司内部的决策，导致这个目标变成了发明一种与Java搭配使用的辅助脚本语言并且语法上有些类似，这个决策导致排除了采用现有的语言，例如perl、python、tcl或Scheme。于是，布兰登·艾克在公司的要求下，使用了十天设计了JavaScript的原型。
-JavaScript最开始并不叫这个名字，最初的命名其实是Mocha，一款咖啡的名字，95年9月的时候改名为LiveScript，同年12月的时候，网景公司与当时的昇阳电脑公司组成的开发联盟为了让这门语言搭上JAVA这个当时的编程语言“热词”，于是临时决定改名为JavaScript，这导致了后来很多人以为两者是不是存在什么关系，但其实两者有很大的不同。
-其实现在想想，要是当时布兰登·艾克并不是用十天草草写了一个JavaScript出来，而是用更长时间打磨出来一个东西，之后的跟微软也好，其本身的故事也好，会不会有很大的不同，这个很值得揣摩，应该会很有趣。
-消亡 在1995年，网景公司推出JavaScript的同时，微软公司也推出了Internet Explorer，从而引发了与网景的浏览器大战，并于96年8月跟着Internet Explorer 3.0一起推出了JScript。
-JScript跟JavaScript两者除了名字有所不同之外，其实其他的东西大致上相同，但是IE3.0由于支持CSS，成为首个支持CSS技术的主流浏览器，并引进诸多其他方面的支持，因此IE3的改进在当时来说是十分具有代表性的，浏览器大战也由此展开。
-在浏览器大战展开之后，网景公司意识到需要想个办法不要被微软抢占市场，所以在1996年11月，网景正式向ECMA（欧洲计算机制造商协会）提交了语言标准，并于1997年6月以JavaScript为基础制定了ECMAScript标准规范“ECMA-262”，同年推出了网景导航者4.0版本，大幅度强化了JavaScript与其他功能，但是同时出现的BUG和CSS的误译，使得市场占有率渐渐被IE侵蚀。
-1997年，苹果电脑因为和微软合作，所以Mac OS中也捆绑了IE浏览器，而Mac OS8.5之后IE for Mac一直作为Mac OS的默认浏览器使用到2006年1月31日被苹果发明出来的Safari取代，而在97年之前，Mac OS自带的浏览器是网景浏览器。
-1998年6月时，Windows98发布，并将IE浏览器以预先安装的方式安装在操作系统中，电脑安装好之后就可以使用，在当时的网速各方面的问题下，使得其他浏览器的试用机会变少。
-最终，网景公司由于市场占有率日渐低下，做出了一个很重大的决定，受到当时流行的Linux等开放源代码项目影响，网景公司决定公布网景通信家的源代码，转型成为开放源代码的软件，软件项目名字叫做“Mozilla”，该项目的开发就交由非盈利团体Mozilla组织（Mozilla Organization）进行，并一直延续至今。
-JavaScript的优缺点 聊完网景公司与JavaScript的诞生到消亡，接下来来聊一聊JavaScript的优点与缺陷。
-JavaScript的缺陷：
-1.设计阶段过于仓促：由于JavaScript设计阶段其实一共就只有十天，设计师本人只是为了交差，也并不愿意这样设计。而另一方面，这种语言的设计初衷，只是为了解决一些简单的网页互动，设计者做梦也没有想到，JavaScript将来可以写出想Gmail这样的庞大且复杂的网页，所以当时也就没有考虑那么复杂应用的需要。
-2.没有先例：JavaScript同时结合了函数式编程和面向对象编程的特点，这很可能是历史上的第一例。而且知道今天位置，JavaScript仍然是世界上唯一使用Prototype继承模式的主要语言，这也使得它没有设计先例可以参考。
-3.过早的标准化：JavaScript的发展非常快，根本没有时间调整设计。 1995年5月，设计方案定稿；10月，解释器开发成功；12月，向市场推出，立刻被广泛接受，全世界的用户大量使用。Javascript缺乏一个从小到大、慢慢积累用户的过程，而是连续的爆炸式扩散增长。大量的既成网页和业余网页设计者的参与，使得调整语言规格困难重重。
-更糟的是，Javascript的规格还没来及调整，就固化了。
-1996年8月，微软公司强势介入，宣布推出自己的脚本语言Jscript；11月，为了压制微软，网景公司决定申请Javascript的国际标准；1997年6月，第一个国际标准ECMA-262正式颁布。
-也就是说，Javascript推出一年半之后，国际标准就问世了。设计缺陷还没有充分暴露就成了标准。相比之下，C语言问世将近20年之后，国际标准才颁布。
-\
-JavaScript的优点：
-既然Javascript有缺陷，数量还不少，那么它是不是一种很糟糕的语言？有没有前途？
-回答是Javascript并不算糟糕，相反它的编程能力很强大，前途很光明。
-首先，如果遵守良好的编程规范，加上第三方函数库的帮助，Javascript的这些缺陷大部分可以回避。
-其次，Javascript目前是网页编程的唯一语言，只要互联网继续发展，它就必然一起发展。目前，许多新项目大大扩展了它的用途，node.js使得Javascript可以用于后端的服务器编程，coffeeScript使你可以用python和ruby的语法，撰写Javascript。
-\
-\
-以上，便是我对网景公司以及JavaScript了解完了之后做出的一些想法跟从网上找到的一些资料的总结，由于还没有完全学习与了解JavaScript，因此没有办法就JavaScript里的诸多缺陷写出自己的了解与看法，但是随着学习的深入，我相信不久的将来，我会写出后续对于JavaScript的思考与总结。</description>
-    </item>
-    
-    <item>
-      <title>浅析URL</title>
-      <link>http://zkh176.github.io/posts/%E6%B5%85%E6%9E%90url/</link>
-      <pubDate>Tue, 19 Apr 2022 17:39:46 +0800</pubDate>
-      
-      <guid>http://zkh176.github.io/posts/%E6%B5%85%E6%9E%90url/</guid>
-      <description>URL的组成
-URL：中文意思为统一资源定位符、英语：Uniform Resource Locator，是因特网上标准的资源的地址（Address），如同在网络上的门牌。它最初是由蒂姆·伯纳斯-李发明用来作为万维网的地址，现在它已经被万维网联盟编制为因特网标准RFC 1738。
-由以下这些部分组成
-\
- DNS的作用  将域名解析为IP 地址； 客户端向DNS服务器（DNS服务器有自己的IP地址）发送域名查询请求； DNS服务器告知客户机Web服务器的IP 地址； 客户机与Web 服务器通信。   nslookup的作用 以百度为例使用cmder 输入nslookup www.baidu.com 便会出现下面各项反应： nslookup www.baidu.com 服务器: UnKnown Address: 192.168.1.1 非权威应答: 名称: www.a.shifen.com Addresses: 110.242.68.3 110.242.68.4 Aliases: www.baidu.com
- \
-IP 英文全称:Internet Protocal
-作用：
- 如何定位一台设备。 如何封装数据报文，以跟其他设备交流。  特殊IP：
- 127.0.0.1表示自己。 localhost通过hosts指定为自己。 0.0.0.0不表示任何设备。   PING命令 PING：（Packet Internet Groper），因特网包探索器，用于测试网络连接量的程序 。ping 是工作在 TCP/IP 网络体系结构中应用层的一个服务命令， 主要是向特定的目的主机发送 ICMP（Internet Control Message Protocol 因特网报文控制协议）Echo 请求报文，测试目的站是否可达及了解其有关状态。</description>
-    </item>
-    
-    <item>
-      <title>浅析URL</title>
-      <link>http://zkh176.github.io/poets/%E6%B5%85%E6%9E%90url/</link>
-      <pubDate>Tue, 19 Apr 2022 17:39:28 +0800</pubDate>
-      
-      <guid>http://zkh176.github.io/poets/%E6%B5%85%E6%9E%90url/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>CSS阶段总结</title>
-      <link>http://zkh176.github.io/posts/css%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93/</link>
-      <pubDate>Tue, 19 Apr 2022 17:37:57 +0800</pubDate>
-      
-      <guid>http://zkh176.github.io/posts/css%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93/</guid>
-      <description>CSS的渲染原理  浏览器渲染过程  步骤
- 根据HTML构建HTML树（DOM） 根据CSS构建CSS树（CSSDOM） 将两棵树合并成一颗渲染树（RenderTree） Layout布局（文档流、盒模型、计算大小和位置） Paint绘制（把边框颜色、文字颜色、阴影等画出来） Compose合成（根据层叠关系展示画面）  \
- CSS 动画的两种做法（transition 和 animation）  \
-transition 意思：过渡
-作用：补充中间帧，给个秒数，会自动把中间帧补齐。
-\
-语法
-transition：属性名、时长、过渡方式、延迟：
-transition：left 200ms linear
-可以用逗号分隔两个不同属性：
-transition:left200ms,top 400ms;
-可以用all代表所有属性
-transition:all200ms;
-过渡方式有：linear 丨ease丨ease-in丨ease-out丨ease-in-out丨cnic-bezier丨step-start丨step-end丨steps，具体含义要靠数学知识。
-\
-注意
-并不是所有属性都能过渡
- display：none=&amp;gt;block没法过渡 一般改成cisibility:hidden=&amp;gt;cisible（不要问为什么） display和visibility的区别自己搜一下 bcakground颜色可以过渡吗？ opacity透明度可以过渡吗？（不推荐使用，容易出问题）  \
-过渡必须要有起始
-一般只有一次动画，或者两次，比如hover和非hover状态的过渡。
-\
-除了起始，还有中间点的话怎么办？
-两种办法
- 使用两次traniform  .a===transform===&amp;gt;.b
-.b===transform===&amp;gt;.c
-如何知道到了中间点呢？
-用setTimeout或者监听transitionend事件transition
-意思：过渡
-作用：补充中间帧，给个秒数，会自动把中间帧补齐。
-\
-语法
-transition：属性名、时长、过渡方式、延迟：
-transition：left 200ms linear
-可以用逗号分隔两个不同属性：
-transition:left200ms,top 400ms;</description>
-    </item>
-    
-    <item>
-      <title>HTML常用标签</title>
-      <link>http://zkh176.github.io/posts/html%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/</link>
-      <pubDate>Tue, 19 Apr 2022 17:31:50 +0800</pubDate>
-      
-      <guid>http://zkh176.github.io/posts/html%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/</guid>
-      <description>一.a 标签的用法 a标签现在学到的有三种用法：
-1.helf：
-是hyper跟reference的缩写，意思是超链接或者超级引用。
-helf的取值有：  &amp;lt;a href=&amp;#34;//google.com&amp;#34;&amp;gt;超链接&amp;lt;/a&amp;gt; &amp;lt;a href=&amp;#34;index.html&amp;#34;&amp;gt;以文件夹为路径的链接&amp;lt;/a&amp;gt; &amp;lt;a href=&amp;#34;javascript:alert(1);&amp;#34;&amp;gt;伪协议，用来写一个什么都不做的a标签，分号冒号用的都是英文符号&amp;lt;/a&amp;gt; 2.target：
-用属性指定在何处显示链接的资源：
-_blank：在新标签页打开对应链接
-_top：在顶层页面打开对应链接
-_parent：在上一级区域打开对应链接。
-_self：在当前页面打开对应链接（默认值）
-示例：
- &amp;lt;a href=&amp;#34;https://baidu.com&amp;#34; target=&amp;#34;_blank&amp;#34;&amp;gt;xxx网址&amp;lt;/a&amp;gt; &amp;lt;a href=&amp;#34;https://baidu.com&amp;#34; target=&amp;#34;_top&amp;#34;&amp;gt;xxx网址&amp;lt;/a&amp;gt; &amp;lt;a href=&amp;#34;https://baidu.com&amp;#34; target=&amp;#34;_parent&amp;#34;&amp;gt;xxx网址&amp;lt;/a&amp;gt; &amp;lt;a href=&amp;#34;https://baidu.com&amp;#34; target=&amp;#34;_self&amp;#34;&amp;gt;xxx网址&amp;lt;/a&amp;gt; 3.download 理论上是用来下载网页，但是实际上很多浏览器不支持，知道就好。
-二.img标签的用法  作用：发出get请求，展示一张图片。 属性：alt（输入当图片加载失败时出现的东西）/height（高）/width（宽）/src（图片地址） 注意：不要同时写宽和高，会使图片变形，绝对不要是图片变形 事件：onload/inerror：两者用来表示图片加载成功或者失败时显示的样式，后者可加入备用图片用以图片显示失败时可以使用  示例：
- &amp;lt;img src=&amp;#34;dog.png&amp;#34; alt=&amp;#34;&amp;#34;&amp;gt; &amp;lt;script&amp;gt; xxx.onload = function () { console.log(图片加载成功) } xxx.onerror = function () { console.log(图片加载失败) } &amp;lt;/script&amp;gt; \
-三.table 标签的用法 现在table常用的只有thead、tbody、tfoot三个标签，三个标签写的顺序跟网页表现出来的顺序没关系，html会自动排列顺序。
-使用的主要元素有：
-tr：意思是table row，table里面的一行。</description>
-    </item>
-    
-    <item>
-      <title>HTML入门笔记</title>
-      <link>http://zkh176.github.io/posts/html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Tue, 19 Apr 2022 17:23:45 +0800</pubDate>
-      
-      <guid>http://zkh176.github.io/posts/html%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</guid>
-      <description>1.HTML 是谁发明的。
-HTML是李爵士发明的。
-2.HTML 起手应该写什么。
-HTML的起手式的快捷键是！+TAB。表现出来的代码是
-&amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;head&amp;gt;  &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34;&amp;gt;  &amp;lt;meta http-equiv=&amp;#34;X-UA-Compatible&amp;#34; content=&amp;#34;IE=edge&amp;#34;&amp;gt;  &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1.0&amp;#34;&amp;gt;  &amp;lt;title&amp;gt;Document&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 其中DOCTYPE html指的是文件类型是html；html lang=&amp;ldquo;en&amp;quot;指的是使用的语言是英文，改成中文的话把en改成zh-CN即可；文件的字符编码一定是UTF-8；title里面写的是网页的标题；其他的东西不要去改动他。
-3.常用的表章节的标签有哪些，分别是什么意思。
-常用的表章节的标签及意思分别是：
-标题：h1~h6
-章节：section
-文章：article
-段落：p
-头部：header
-脚部：footer
-主要内容：main
-旁支内容：aside
-划分：div
-4.全局属性有哪些。
-全局属性有以下的：
-class：给某个标签一个标记或者分类
-contenteditable：使任何一个元素可以被编辑
-hidden：加在标签里面可以让一个东西看不见
-id：不到万不得已，不要用ID，因为ID不报错
-style：每一个元素可以使用一个style元素，
-tabindex:代表按tab时响应的顺序，正数按从小到大的顺序，0是最后一个，负数代表不会到这个词条上。
-title：用来显示完整的内容。
-5.常用的内容标签有哪些，分别是什么意思。
-常用的内容标签及意思：
-ol+li:有序列表
-ul+li:无序列表
-dl+dt+dd：description list简称dl里面是用来描述的对象和内容
-pre：如果想要保留回车空格等，就用pre把内容包裹起来
-hr：做分割线用的
-br:用于强制换行
-a:用来超链接
-em:用来强调语气
-strong:用来强调内容本身
-code:用来在里面写代码
-quote:引用某个东西
-blockquote：可以换行的引用</description>
-    </item>
-    
-    <item>
-      <title>开博大吉</title>
-      <link>http://zkh176.github.io/posts/%E5%BC%80%E5%8D%9A%E5%A4%A7%E5%90%89/</link>
-      <pubDate>Tue, 19 Apr 2022 16:30:07 +0800</pubDate>
-      
-      <guid>http://zkh176.github.io/posts/%E5%BC%80%E5%8D%9A%E5%A4%A7%E5%90%89/</guid>
-      <description>大家好 我的博客开通了，我会在这里分享一些笔记跟心得。</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>浅岸的博客</title>
+        <link>https://zhengkanghao.cn/</link>
+        <description>浅岸的博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 19 Apr 2022 17:47:42 &#43;0800</lastBuildDate>
+            <atom:link href="https://zhengkanghao.cn/index.xml" rel="self" type="application/rss+xml" />
+        <item>
+    <title>Vue中的.sync修饰符</title>
+    <link>https://zhengkanghao.cn/vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6/</link>
+    <pubDate>Tue, 19 Apr 2022 17:47:42 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://zhengkanghao.cn/vue%E4%B8%AD%E7%9A%84.sync%E4%BF%AE%E9%A5%B0%E7%AC%A6/</guid>
+    <description><![CDATA[为什么用.sync修饰符 当一个子组件改变了一个 prop 的值时，这个变化也会同步到父组件中所绑定。如果我们不用.sync，我们想做上面的那个弹窗功能]]></description>
+</item>
+<item>
+    <title>Vue响应式数据的理解笔记</title>
+    <link>https://zhengkanghao.cn/vue%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E7%90%86%E8%A7%A3%E7%AC%94%E8%AE%B0/</link>
+    <pubDate>Tue, 19 Apr 2022 17:47:17 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://zhengkanghao.cn/vue%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E7%90%86%E8%A7%A3%E7%AC%94%E8%AE%B0/</guid>
+    <description><![CDATA[theme: scrolls-light 图片及部分文章参考出处 响应式原理 数据响应式系统，其非侵入性的响应式系统，是vue最独特的特性之一。数据模型是被代理的JavaScript]]></description>
+</item>
+<item>
+    <title>浅析Vue</title>
+    <link>https://zhengkanghao.cn/%E6%B5%85%E6%9E%90vue/</link>
+    <pubDate>Tue, 19 Apr 2022 17:46:43 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://zhengkanghao.cn/%E6%B5%85%E6%9E%90vue/</guid>
+    <description><![CDATA[Vue的两个版本 vue有两个版本，分别是完整版（Vue.js）和非完整版（vue.runtime.js），两者的区别： 两个版本推荐使用非完整]]></description>
+</item>
+<item>
+    <title>MVC小结</title>
+    <link>https://zhengkanghao.cn/mvc%E5%B0%8F%E7%BB%93/</link>
+    <pubDate>Tue, 19 Apr 2022 17:44:55 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://zhengkanghao.cn/mvc%E5%B0%8F%E7%BB%93/</guid>
+    <description><![CDATA[MVC三个对象分别做什么？ MVC（Model View Controller）是一种架构模式。分为M、V、C三个部分。 M：model，数据层（数据模型]]></description>
+</item>
+<item>
+    <title>浅析jQuery设计思想</title>
+    <link>https://zhengkanghao.cn/%E6%B5%85%E6%9E%90jquery%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</link>
+    <pubDate>Tue, 19 Apr 2022 17:44:23 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://zhengkanghao.cn/%E6%B5%85%E6%9E%90jquery%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</guid>
+    <description><![CDATA[学习了jQuery一段时间，对于jQuery的基本设计思想和主要用法的简单总结，就是“选择某个网页元素，然后对其进行简单的操作”。 记录一下最]]></description>
+</item>
+<item>
+    <title>JS函数的执行时机</title>
+    <link>https://zhengkanghao.cn/js%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A7%E8%A1%8C%E6%97%B6%E6%9C%BA/</link>
+    <pubDate>Tue, 19 Apr 2022 17:42:22 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://zhengkanghao.cn/js%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A7%E8%A1%8C%E6%97%B6%E6%9C%BA/</guid>
+    <description><![CDATA[解释下为什么以下代码会打印 6 个 6 1 2 3 4 5 6 let i = 0 for(i = 0; i&lt;6; i++){ setTimeout(()=&gt;{ console.log(i) },0) } 答案： 首先setTimeout的作用是等一会再执行打印，for循环会先]]></description>
+</item>
+<item>
+    <title>JaJS对象基本用法</title>
+    <link>https://zhengkanghao.cn/js%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</link>
+    <pubDate>Tue, 19 Apr 2022 17:41:50 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://zhengkanghao.cn/js%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</guid>
+    <description><![CDATA[1.声明对象的两种语法 对象的定义 无序的数据集合。 键值对的集合。 写法 1.正规的写法：let 对象名=new Object({&lsquo;键名（属]]></description>
+</item>
+<item>
+    <title>JavaScript笔记——基本语法</title>
+    <link>https://zhengkanghao.cn/javascript%E7%AC%94%E8%AE%B0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</link>
+    <pubDate>Tue, 19 Apr 2022 17:41:17 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://zhengkanghao.cn/javascript%E7%AC%94%E8%AE%B0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</guid>
+    <description><![CDATA[1.语句和表达式 JavaScript程序的执行单位为行，也就是一行一行地执行，一般情况下，每一行就是一个语句。 语句是为了完成某种任务而进行的]]></description>
+</item>
+<item>
+    <title>网景与JavaScript的历史</title>
+    <link>https://zhengkanghao.cn/%E7%BD%91%E6%99%AF%E4%B8%8Ejavascript%E7%9A%84%E5%8E%86%E5%8F%B2/</link>
+    <pubDate>Tue, 19 Apr 2022 17:40:32 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://zhengkanghao.cn/%E7%BD%91%E6%99%AF%E4%B8%8Ejavascript%E7%9A%84%E5%8E%86%E5%8F%B2/</guid>
+    <description><![CDATA[起始 JavaScript，一个1995年的网景公司基于为了给公司的浏览器嵌入一个可以与JAVA搭配使用的辅助脚本语言，而在十天做出来的一款网]]></description>
+</item>
+<item>
+    <title>浅析URL</title>
+    <link>https://zhengkanghao.cn/%E6%B5%85%E6%9E%90url/</link>
+    <pubDate>Tue, 19 Apr 2022 17:39:46 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://zhengkanghao.cn/%E6%B5%85%E6%9E%90url/</guid>
+    <description><![CDATA[URL的组成 URL：中文意思为统一资源定位符、英语：Uniform Resource Locator，是因特网上标准的资源的地址（Address），如同在网络]]></description>
+</item>
+</channel>
 </rss>

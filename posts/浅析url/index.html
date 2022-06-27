@@ -1,159 +1,102 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    
-    <title>浅析URL | 浅岸的博客</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="URL的组成
-URL：中文意思为统一资源定位符、英语：Uniform Resource Locator，是因特网上标准的资源的地址（Address），如同在网络上的门牌。它最初是由蒂姆·伯纳斯-李发明用来作为万维网的地址，现在它已经被万维网联盟编制为因特网标准RFC 1738。
-由以下这些部分组成
-\
- DNS的作用  将域名解析为IP 地址； 客户端向DNS服务器（DNS服务器有自己的IP地址）发送域名查询请求； DNS服务器告知客户机Web服务器的IP 地址； 客户机与Web 服务器通信。   nslookup的作用 以百度为例使用cmder 输入nslookup www.baidu.com 便会出现下面各项反应： nslookup www.baidu.com 服务器: UnKnown Address: 192.168.1.1 非权威应答: 名称: www.a.shifen.com Addresses: 110.242.68.3 110.242.68.4 Aliases: www.baidu.com
- \
-IP 英文全称:Internet Protocal
-作用：
- 如何定位一台设备。 如何封装数据报文，以跟其他设备交流。  特殊IP：
- 127.0.0.1表示自己。 localhost通过hosts指定为自己。 0.0.0.0不表示任何设备。   PING命令 PING：（Packet Internet Groper），因特网包探索器，用于测试网络连接量的程序 。ping 是工作在 TCP/IP 网络体系结构中应用层的一个服务命令， 主要是向特定的目的主机发送 ICMP（Internet Control Message Protocol 因特网报文控制协议）Echo 请求报文，测试目的站是否可达及了解其有关状态。">
-    <meta name="generator" content="Hugo 0.97.3" />
-    
-    
-    
-    
-      <meta name="robots" content="noindex, nofollow">
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-    
-    
-    
-      
-
-    
-
-    
-    
-    <meta property="og:title" content="浅析URL" />
-<meta property="og:description" content="URL的组成
-URL：中文意思为统一资源定位符、英语：Uniform Resource Locator，是因特网上标准的资源的地址（Address），如同在网络上的门牌。它最初是由蒂姆·伯纳斯-李发明用来作为万维网的地址，现在它已经被万维网联盟编制为因特网标准RFC 1738。
-由以下这些部分组成
-\
- DNS的作用  将域名解析为IP 地址； 客户端向DNS服务器（DNS服务器有自己的IP地址）发送域名查询请求； DNS服务器告知客户机Web服务器的IP 地址； 客户机与Web 服务器通信。   nslookup的作用 以百度为例使用cmder 输入nslookup www.baidu.com 便会出现下面各项反应： nslookup www.baidu.com 服务器: UnKnown Address: 192.168.1.1 非权威应答: 名称: www.a.shifen.com Addresses: 110.242.68.3 110.242.68.4 Aliases: www.baidu.com
- \
-IP 英文全称:Internet Protocal
-作用：
- 如何定位一台设备。 如何封装数据报文，以跟其他设备交流。  特殊IP：
- 127.0.0.1表示自己。 localhost通过hosts指定为自己。 0.0.0.0不表示任何设备。   PING命令 PING：（Packet Internet Groper），因特网包探索器，用于测试网络连接量的程序 。ping 是工作在 TCP/IP 网络体系结构中应用层的一个服务命令， 主要是向特定的目的主机发送 ICMP（Internet Control Message Protocol 因特网报文控制协议）Echo 请求报文，测试目的站是否可达及了解其有关状态。" />
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>浅析URL - 浅岸的博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="浅析URL" />
+<meta property="og:description" content="URL的组成 URL：中文意思为统一资源定位符、英语：Uniform Resource Locator，是因特网上标准的资源的地址（Address），如同在网络" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zkh176.github.io/posts/%E6%B5%85%E6%9E%90url/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="http://example.org/posts/%E6%B5%85%E6%9E%90url/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-19T17:39:46+08:00" />
-<meta property="article:modified_time" content="2022-04-19T17:39:46+08:00" />
+<meta property="article:modified_time" content="2022-04-19T17:39:46+08:00" /><meta property="og:site_name" content="My cool site" />
 
-<meta itemprop="name" content="浅析URL">
-<meta itemprop="description" content="URL的组成
-URL：中文意思为统一资源定位符、英语：Uniform Resource Locator，是因特网上标准的资源的地址（Address），如同在网络上的门牌。它最初是由蒂姆·伯纳斯-李发明用来作为万维网的地址，现在它已经被万维网联盟编制为因特网标准RFC 1738。
-由以下这些部分组成
-\
- DNS的作用  将域名解析为IP 地址； 客户端向DNS服务器（DNS服务器有自己的IP地址）发送域名查询请求； DNS服务器告知客户机Web服务器的IP 地址； 客户机与Web 服务器通信。   nslookup的作用 以百度为例使用cmder 输入nslookup www.baidu.com 便会出现下面各项反应： nslookup www.baidu.com 服务器: UnKnown Address: 192.168.1.1 非权威应答: 名称: www.a.shifen.com Addresses: 110.242.68.3 110.242.68.4 Aliases: www.baidu.com
- \
-IP 英文全称:Internet Protocal
-作用：
- 如何定位一台设备。 如何封装数据报文，以跟其他设备交流。  特殊IP：
- 127.0.0.1表示自己。 localhost通过hosts指定为自己。 0.0.0.0不表示任何设备。   PING命令 PING：（Packet Internet Groper），因特网包探索器，用于测试网络连接量的程序 。ping 是工作在 TCP/IP 网络体系结构中应用层的一个服务命令， 主要是向特定的目的主机发送 ICMP（Internet Control Message Protocol 因特网报文控制协议）Echo 请求报文，测试目的站是否可达及了解其有关状态。"><meta itemprop="datePublished" content="2022-04-19T17:39:46+08:00" />
-<meta itemprop="dateModified" content="2022-04-19T17:39:46+08:00" />
-<meta itemprop="wordCount" content="130">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="浅析URL"/>
-<meta name="twitter:description" content="URL的组成
-URL：中文意思为统一资源定位符、英语：Uniform Resource Locator，是因特网上标准的资源的地址（Address），如同在网络上的门牌。它最初是由蒂姆·伯纳斯-李发明用来作为万维网的地址，现在它已经被万维网联盟编制为因特网标准RFC 1738。
-由以下这些部分组成
-\
- DNS的作用  将域名解析为IP 地址； 客户端向DNS服务器（DNS服务器有自己的IP地址）发送域名查询请求； DNS服务器告知客户机Web服务器的IP 地址； 客户机与Web 服务器通信。   nslookup的作用 以百度为例使用cmder 输入nslookup www.baidu.com 便会出现下面各项反应： nslookup www.baidu.com 服务器: UnKnown Address: 192.168.1.1 非权威应答: 名称: www.a.shifen.com Addresses: 110.242.68.3 110.242.68.4 Aliases: www.baidu.com
- \
-IP 英文全称:Internet Protocal
-作用：
- 如何定位一台设备。 如何封装数据报文，以跟其他设备交流。  特殊IP：
- 127.0.0.1表示自己。 localhost通过hosts指定为自己。 0.0.0.0不表示任何设备。   PING命令 PING：（Packet Internet Groper），因特网包探索器，用于测试网络连接量的程序 。ping 是工作在 TCP/IP 网络体系结构中应用层的一个服务命令， 主要是向特定的目的主机发送 ICMP（Internet Control Message Protocol 因特网报文控制协议）Echo 请求报文，测试目的站是否可达及了解其有关状态。"/>
+<meta name="twitter:description" content="URL的组成 URL：中文意思为统一资源定位符、英语：Uniform Resource Locator，是因特网上标准的资源的地址（Address），如同在网络"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/%E6%B5%85%E6%9E%90url/" /><link rel="prev" href="http://example.org/posts/css%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93/" /><link rel="next" href="http://example.org/posts/%E7%BD%91%E6%99%AF%E4%B8%8Ejavascript%E7%9A%84%E5%8E%86%E5%8F%B2/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "浅析URL",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/%E6%B5%85%E6%9E%90url\/"
+        },"genre": "posts","wordcount":  948 ,
+        "url": "http:\/\/example.org\/posts\/%E6%B5%85%E6%9E%90url\/","datePublished": "2022-04-19T17:39:46+08:00","dateModified": "2022-04-19T17:39:46+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "浅岸"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
-	
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-
-    
-   
-  
-
-  <header>
-    <div class="bg-black">
-      <nav class="pv3 ph3 ph4-ns" role="navigation">
-  <div class="flex-l justify-between items-center center">
-    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
-      
-        浅岸的博客
-      
-    </a>
-    <div class="flex-l items-center">
-      
-
-      
-      
-<div class="ananke-socials">
-  
-</div>
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="浅岸的博客">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
-</nav>
-
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="浅岸的博客">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
     </div>
-  </header>
-
-
-
-    <main class="pb7" role="main">
-      
-  
-  <article class="flex-l flex-wrap justify-between mw8 center ph3">
-    <header class="mt4 w-100">
-      <aside class="instapaper_ignoref b helvetica tracked">
-          
-        POSTS
-      </aside>
-      
-
-
-
-
-
-
-
-
-
-
-  <div id="sharing" class="mt3 ananke-socials">
-    
-  </div>
-
-
-      <h1 class="f1 athelas mt3 mb1">浅析URL</h1>
-      
-      
-      
-      <time class="f6 mv4 dib tracked" datetime="2022-04-19T17:39:46+08:00">April 19, 2022</time>
-      
-
-      
-      
-    </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>URL的组成</p>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">浅析URL</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>浅岸</a>
+</span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-04-19">2022-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;948 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#dns的作用">DNS的作用</a></li>
+    <li><a href="#nslookup的作用">nslookup的作用</a></li>
+    <li><a href="#ip">IP</a></li>
+    <li><a href="#ping命令">PING命令</a></li>
+    <li><a href="#域名">域名</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>URL的组成</p>
 <p>URL：中文意思为统一资源定位符、英语：Uniform Resource Locator，是因特网上标准的资源的地址（Address），如同在网络上的门牌。它最初是由蒂姆·伯纳斯-李发明用来作为万维网的地址，现在它已经被万维网联盟编制为因特网标准RFC 1738。</p>
 <p>由以下这些部分组成</p>
-<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/40dd3ae68b7847958ec67baf4bd28c29~tplv-k3u1fbpfcp-zoom-1.image" alt=""></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/40dd3ae68b7847958ec67baf4bd28c29~tplv-k3u1fbpfcp-zoom-1.image"
+        data-srcset="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/40dd3ae68b7847958ec67baf4bd28c29~tplv-k3u1fbpfcp-zoom-1.image, https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/40dd3ae68b7847958ec67baf4bd28c29~tplv-k3u1fbpfcp-zoom-1.image 1.5x, https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/40dd3ae68b7847958ec67baf4bd28c29~tplv-k3u1fbpfcp-zoom-1.image 2x"
+        data-sizes="auto"
+        alt="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/40dd3ae68b7847958ec67baf4bd28c29~tplv-k3u1fbpfcp-zoom-1.image"
+        title="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/40dd3ae68b7847958ec67baf4bd28c29~tplv-k3u1fbpfcp-zoom-1.image" /></p>
 <p>\</p>
 <hr>
 <h2 id="dns的作用">DNS的作用</h2>
@@ -165,7 +108,11 @@ IP 英文全称:Internet Protocal
 </ol>
 <hr>
 <h2 id="nslookup的作用">nslookup的作用</h2>
-<p>以百度为例使用cmder 输入nslookup <a href="https://link.juejin.cn/?target=http%3A%2F%2Fwww.baidu.com">www.baidu.com</a> 便会出现下面各项反应： nslookup <a href="https://link.juejin.cn/?target=http%3A%2F%2Fwww.baidu.com">www.baidu.com</a> 服务器: UnKnown Address: 192.168.1.1 非权威应答: 名称: <a href="https://link.juejin.cn/?target=http%3A%2F%2Fwww.a.shifen.com">www.a.shifen.com</a> Addresses: 110.242.68.3 110.242.68.4 Aliases: <a href="https://link.juejin.cn/?target=http%3A%2F%2Fwww.baidu.com">www.baidu.com</a></p>
+<p>以百度为例使用cmder 输入nslookup <a href="https://link.juejin.cn/?target=http%3A%2F%2Fwww.baidu.com" target="_blank" rel="noopener noreffer">www.baidu.com</a>
+ 便会出现下面各项反应： nslookup <a href="https://link.juejin.cn/?target=http%3A%2F%2Fwww.baidu.com" target="_blank" rel="noopener noreffer">www.baidu.com</a>
+ 服务器: UnKnown Address: 192.168.1.1 非权威应答: 名称: <a href="https://link.juejin.cn/?target=http%3A%2F%2Fwww.a.shifen.com" target="_blank" rel="noopener noreffer">www.a.shifen.com</a>
+ Addresses: 110.242.68.3 110.242.68.4 Aliases: <a href="https://link.juejin.cn/?target=http%3A%2F%2Fwww.baidu.com" target="_blank" rel="noopener noreffer">www.baidu.com</a>
+</p>
 <hr>
 <p>\</p>
 <h2 id="ip">IP</h2>
@@ -186,9 +133,11 @@ IP 英文全称:Internet Protocal
 <p>PING：（Packet Internet Groper），因特网包探索器，用于测试网络连接量的程序 。ping 是工作在 TCP/IP 网络体系结构中应用层的一个服务命令， 主要是向特定的目的主机发送 ICMP（Internet Control Message Protocol 因特网报文控制协议）Echo 请求报文，测试目的站是否可达及了解其有关状态。</p>
 <p>用法：</p>
 <p>以百度为例使用cmder输入ping baidu.com表会出现以下示例：</p>
-<p>λ ping <a href="http://baidu.com/">baidu.com</a></p>
+<p>λ ping <a href="http://baidu.com/" target="_blank" rel="noopener noreffer">baidu.com</a>
+</p>
 <p>\</p>
-<p>正在 Ping <a href="http://baidu.com/">baidu.com</a> [220.181.38.251] 具有 32 字节的数据:</p>
+<p>正在 Ping <a href="http://baidu.com/" target="_blank" rel="noopener noreffer">baidu.com</a>
+ [220.181.38.251] 具有 32 字节的数据:</p>
 <p>来自 220.181.38.251 的回复: 字节=32 时间=41ms TTL=52</p>
 <p>来自 220.181.38.251 的回复: 字节=32 时间=40ms TTL=52</p>
 <p>来自 220.181.38.251 的回复: 字节=32 时间=40ms TTL=52</p>
@@ -208,38 +157,44 @@ IP 英文全称:Internet Protocal
 <ol>
 <li>域名的第一级是[顶级域]，它包括[通用顶级域]，例如[.com]、[.net]和[.org]；以及[国家和地区顶级域]，例如[.us]。</li>
 <li>baidu.com是二级域名（俗称一级域名）。</li>
-<li><a href="https://www.baidu.com">www.baidu.com</a>是三级域名（俗称二级域名）。</li>
+<li><a href="https://www.baidu.com" target="_blank" rel="noopener noreffer">www.baidu.com</a>
+是三级域名（俗称二级域名）。</li>
 </ol>
-<ul class="pa0">
-  
-</ul>
-<div class="mt6 instapaper_ignoref">
-      
-      
-      </div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-04-19</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/%E6%B5%85%E6%9E%90url/" data-title="浅析URL"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/%E6%B5%85%E6%9E%90url/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/%E6%B5%85%E6%9E%90url/" data-title="浅析URL"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/%E6%B5%85%E6%9E%90url/" data-title="浅析URL"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@6.20.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/%E6%B5%85%E6%9E%90url/" data-title="浅析URL"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
     </div>
 
-    <aside class="w-30-l mt6-l">
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
 
+    <div class="post-nav"><a href="/posts/css%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93/" class="prev" rel="prev" title="CSS阶段总结"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CSS阶段总结</a>
+            <a href="/posts/%E7%BD%91%E6%99%AF%E4%B8%8Ejavascript%E7%9A%84%E5%8E%86%E5%8F%B2/" class="next" rel="next" title="网景与JavaScript的历史">网景与JavaScript的历史<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.97.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">浅岸</a></span></div>
+        </div>
+    </footer></div>
 
-
-
-</aside>
-
-  </article>
-
-    </main>
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://zkh176.github.io/" >
-    &copy;  浅岸的博客 2022 
-  </a>
-    <div>
-<div class="ananke-socials">
-  
-</div></div>
-  </div>
-</footer>
-
-  </body>
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.1/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

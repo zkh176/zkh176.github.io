@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>MVC小结 - 浅岸的博客</title><meta name="Description" content="浅岸的博客"><meta property="og:title" content="MVC小结" />
+<meta property="og:description" content="MVC三个对象分别做什么？ MVC（Model View Controller）是一种架构模式。分为M、V、C三个部分。 M：model，数据层（数据模型" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhengkanghao.cn/mvc%E5%B0%8F%E7%BB%93/" /><meta property="og:image" content="https://zhengkanghao.cn/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-19T17:44:55+08:00" />
+<meta property="article:modified_time" content="2022-04-19T17:44:55+08:00" /><meta property="og:site_name" content="我的网站" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zhengkanghao.cn/logo.png"/>
+
+<meta name="twitter:title" content="MVC小结"/>
+<meta name="twitter:description" content="MVC三个对象分别做什么？ MVC（Model View Controller）是一种架构模式。分为M、V、C三个部分。 M：model，数据层（数据模型"/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhengkanghao.cn/mvc%E5%B0%8F%E7%BB%93/" /><link rel="prev" href="https://zhengkanghao.cn/%E6%B5%85%E6%9E%90jquery%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/" /><link rel="next" href="https://zhengkanghao.cn/%E6%B5%85%E6%9E%90vue/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "MVC小结",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/zhengkanghao.cn\/mvc%E5%B0%8F%E7%BB%93\/"
+        },"genre": "posts","wordcount":  1549 ,
+        "url": "https:\/\/zhengkanghao.cn\/mvc%E5%B0%8F%E7%BB%93\/","datePublished": "2022-04-19T17:44:55+08:00","dateModified": "2022-04-19T17:44:55+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="浅岸的博客"></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="浅岸的博客"></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">MVC小结</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a>
+</span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-04-19">2022-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1549 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#model数据层">Model数据层</a></li>
+    <li><a href="#view视图层">View视图层</a></li>
+    <li><a href="#controller控制层">Controller控制层</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#为什么会出现表驱动编程">为什么会出现表驱动编程？</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#这里的模块化指的是前端模块化模块化也是mvc的重要前提它把相对独立的代码从一大段代码里抽取成一个个小模块每个模块之间相对独立这样也方便日后的维护">这里的模块化指的是前端模块化，模块化也是MVC的重要前提。它把相对独立的代码从一大段代码里抽取成一个个小模块，每个模块之间相对独立，这样也方便日后的维护。</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="mvc三个对象分别做什么">MVC三个对象分别做什么？</h1>
+<p><strong>MVC（Model View Controller）是一种架构模式。分为M、V、C三个部分。</strong></p>
+<p><strong>M：model，数据层（数据模型），负责操作所有的数据。</strong></p>
+<p><strong>V：view，视图层，负责所有UI界面，是提供给用户的操作界面，是程序的外壳。</strong></p>
+<p><strong>C：controller，控制层，负责格局用户从“视图层”输入指令，选取“数据层中的数据”，对其进行相应的操作（绑定事件等），然后产生最终结果。</strong></p>
+<p>这三层是紧密联系在一起的，但是又相互独立，每一层内部的变化不影响其他层。每一层都对外提供接口，供上面一层调用。</p>
+<p>这样一来，软件就可以实现模块化，修改外观或者变更数据都不用修改其他层，大大方便了维护和升级。</p>
+<p>关于MVC，事实上没有一个明确的定义，每个前端对其理解都会有些许偏差，我理解的MVC是将代码结构化的一种抽象的概念，比如说：</p>
+<h2 id="model数据层">Model数据层</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">//示例
+</span></span><span class="line"><span class="cl">let Model = {
+</span></span><span class="line"><span class="cl">  data: { 数据源 },
+</span></span><span class="line"><span class="cl">  create: { 增加数据 },
+</span></span><span class="line"><span class="cl">  delete: { 删除数据 },
+</span></span><span class="line"><span class="cl">  update(data) {
+</span></span><span class="line"><span class="cl">    Object.assign(m.data, data); //用新数据替换旧数据
+</span></span><span class="line"><span class="cl">    eventBus.trigger(&#34;m:update&#34;); //eventBus触发&#39;m:update&#39;信息，通知View刷新界面
+</span></span><span class="line"><span class="cl">  },
+</span></span><span class="line"><span class="cl">  get: { 获取数据 },
+</span></span><span class="line"><span class="cl">};
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="view视图层">View视图层</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">//示例
+</span></span><span class="line"><span class="cl">let View={
+</span></span><span class="line"><span class="cl">    el:要刷新的元素，
+</span></span><span class="line"><span class="cl">    html：&#39;要显示在页面上的刷新内容&#39;
+</span></span><span class="line"><span class="cl">    init(){
+</span></span><span class="line"><span class="cl">        v.el:初始化需要刷新的元素
+</span></span><span class="line"><span class="cl">    }，
+</span></span><span class="line"><span class="cl">    render(){
+</span></span><span class="line"><span class="cl">        刷新页面
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="controller控制层">Controller控制层</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">let Controller={
+</span></span><span class="line"><span class="cl">    init(){
+</span></span><span class="line"><span class="cl">        v.init()//初始化View
+</span></span><span class="line"><span class="cl">        v.render()//第一次渲染页面
+</span></span><span class="line"><span class="cl">        c.autoBindEvents()//自动的事件绑定
+</span></span><span class="line"><span class="cl">        eventBus.on(&#39;m:update&#39;,()=&gt;{v.render()}//当enentsBus触发&#39;m:update&#39;是View刷新
+</span></span><span class="line"><span class="cl">    }，
+</span></span><span class="line"><span class="cl">    events:{事件以哈希表的方式记录存储},
+</span></span><span class="line"><span class="cl">    //例如：
+</span></span><span class="line"><span class="cl">   events: {
+</span></span><span class="line"><span class="cl">    &#39;click #add1&#39;: &#39;add&#39;,
+</span></span><span class="line"><span class="cl">    &#39;click #minus1&#39;: &#39;minus&#39;,
+</span></span><span class="line"><span class="cl">    &#39;click #mul2&#39;: &#39;mul&#39;,
+</span></span><span class="line"><span class="cl">    &#39;click #divide2&#39;: &#39;div&#39;,
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    add() {
+</span></span><span class="line"><span class="cl">      m.update({n: m.data.n + 1})
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    minus() {
+</span></span><span class="line"><span class="cl">      m.update({n: m.data.n - 1})
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    mul() {
+</span></span><span class="line"><span class="cl">      m.update({n: m.data.n * 2})
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    div() {
+</span></span><span class="line"><span class="cl">      m.update({n: m.data.n / 2})
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    method(){
+</span></span><span class="line"><span class="cl">        data=新数据
+</span></span><span class="line"><span class="cl">        m.update(data) // controller 通知 model去更新数据
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">    autoBindEvents(){
+</span></span><span class="line"><span class="cl">    	for (let key in c.events) { // 遍历events表，然后自动绑定事件
+</span></span><span class="line"><span class="cl">      const value = c[c.events[key]]
+</span></span><span class="line"><span class="cl">      const spaceIndex = key.indexOf(&#39; &#39;)
+</span></span><span class="line"><span class="cl">      const part1 = key.slice(0, spaceIndex) // 拿到 &#39;click&#39;
+</span></span><span class="line"><span class="cl">      const part2 = key.slice(spaceIndex + 1)  // 拿到&#39;#add1&#39;
+</span></span><span class="line"><span class="cl">      v.el.on(part1, part2, value)
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="eventbus-有哪些-api是做什么用的">EventBus 有哪些 API，是做什么用的</h1>
+<p><strong>前面提到MVC三层是紧密联系在一起的，又互相独立的，每一层内部的变化不影响其它层。当层与层之间需要通信时，这时就需要EventBus，它主要用于组件之间的监听与通信。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">eventBus.trigger(&#39;m:updated&#39;) //触发事件 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">eventBus.on(&#39;m:updated&#39;,()=&gt;{ //监听事件
+</span></span><span class="line"><span class="cl">     v.render(m.data.n)
+</span></span><span class="line"><span class="cl"> })
+</span></span><span class="line"><span class="cl"> eventBus.off(&#39;m:updated&#39;)//取消监听
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="表驱动编程是做什么的">表驱动编程是做什么的？</h1>
+<h2 id="为什么会出现表驱动编程">为什么会出现表驱动编程？</h2>
+<p>随着逻辑复杂性的增加，if/else或switch中的代码变得越来越臃肿，代码可读性不强，所谓的表驱动程序，指的是把一大堆的if&hellip;else&hellip;这样的逻辑进行处理，从而转化成从一个hash表中查找kry&ndash;value对的过程。</p>
+<h1 id="模块化的理解">模块化的理解</h1>
+<h2 id="这里的模块化指的是前端模块化模块化也是mvc的重要前提它把相对独立的代码从一大段代码里抽取成一个个小模块每个模块之间相对独立这样也方便日后的维护">这里的模块化指的是前端模块化，模块化也是MVC的重要前提。它把相对独立的代码从一大段代码里抽取成一个个小模块，每个模块之间相对独立，这样也方便日后的维护。</h2>
+<p>ES6的语法里引入了import和export，就是用来实现模块化：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">export default c; // 默认导出
+</span></span><span class="line"><span class="cl">export { c }; // 另外一种导出方式。记得要加花括号
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="划分模块的一个准则是高内聚低耦合">划分模块的一个准则是「高内聚、低耦合」</h1>
+<p><strong>高内聚</strong>，是指一个软件模块是由相关性很强的代码组成，只负责一项任务，也就是常说的单一责任原则。</p>
+<p><strong>低耦合</strong>，是指模块之间的联系越少越好，接口越简单越好，实现低耦合，细线通信。</p>
+<p>如果各个模块之间接口很复杂，说明功能划分有不合理之处、模块之间的耦合太高，同时也说明单个模块的内聚不高。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-04-19</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/mvc%E5%B0%8F%E7%BB%93/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://zhengkanghao.cn/mvc%E5%B0%8F%E7%BB%93/" data-title="MVC小结"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://zhengkanghao.cn/mvc%E5%B0%8F%E7%BB%93/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://zhengkanghao.cn/mvc%E5%B0%8F%E7%BB%93/" data-title="MVC小结"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://zhengkanghao.cn/mvc%E5%B0%8F%E7%BB%93/" data-title="MVC小结"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://zhengkanghao.cn/mvc%E5%B0%8F%E7%BB%93/" data-title="MVC小结"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E6%B5%85%E6%9E%90jquery%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/" class="prev" rel="prev" title="浅析jQuery设计思想"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>浅析jQuery设计思想</a>
+            <a href="/%E6%B5%85%E6%9E%90vue/" class="next" rel="next" title="浅析Vue">浅析Vue<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

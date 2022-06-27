@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>JavaScript笔记——基本语法 - 浅岸的博客</title><meta name="Description" content="浅岸的博客"><meta property="og:title" content="JavaScript笔记——基本语法" />
+<meta property="og:description" content="1.语句和表达式 JavaScript程序的执行单位为行，也就是一行一行地执行，一般情况下，每一行就是一个语句。 语句是为了完成某种任务而进行的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhengkanghao.cn/javascript%E7%AC%94%E8%AE%B0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" /><meta property="og:image" content="https://zhengkanghao.cn/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-19T17:41:17+08:00" />
+<meta property="article:modified_time" content="2022-04-19T17:41:17+08:00" /><meta property="og:site_name" content="我的网站" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zhengkanghao.cn/logo.png"/>
+
+<meta name="twitter:title" content="JavaScript笔记——基本语法"/>
+<meta name="twitter:description" content="1.语句和表达式 JavaScript程序的执行单位为行，也就是一行一行地执行，一般情况下，每一行就是一个语句。 语句是为了完成某种任务而进行的"/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://zhengkanghao.cn/javascript%E7%AC%94%E8%AE%B0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" /><link rel="prev" href="https://zhengkanghao.cn/%E7%BD%91%E6%99%AF%E4%B8%8Ejavascript%E7%9A%84%E5%8E%86%E5%8F%B2/" /><link rel="next" href="https://zhengkanghao.cn/js%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "JavaScript笔记——基本语法",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/zhengkanghao.cn\/javascript%E7%AC%94%E8%AE%B0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95\/"
+        },"genre": "posts","wordcount":  983 ,
+        "url": "https:\/\/zhengkanghao.cn\/javascript%E7%AC%94%E8%AE%B0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95\/","datePublished": "2022-04-19T17:41:17+08:00","dateModified": "2022-04-19T17:41:17+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="浅岸的博客"></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="浅岸的博客"></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JavaScript笔记——基本语法</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a>
+</span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-04-19">2022-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;983 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1语句和表达式">1.语句和表达式</a></li>
+    <li><a href="#2标识符的规则">2.标识符的规则</a></li>
+    <li><a href="#3if-else-语句">3.if else 语句</a></li>
+    <li><a href="#4while-for-语句">4.while for 语句</a>
+      <ul>
+        <li><a href="#while循环">while循环</a></li>
+        <li><a href="#for循环">for循环</a></li>
+      </ul>
+    </li>
+    <li><a href="#5break-continue">5.break continue</a></li>
+    <li><a href="#6label">6.label</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="1语句和表达式">1.语句和表达式</h2>
+<p>JavaScript程序的执行单位为行，也就是一行一行地执行，一般情况下，每一行就是一个语句。</p>
+<p>语句是为了完成某种任务而进行的操作，比如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">var a = 1 + 3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>就是一行赋值语句，这条语句先用var命令，声明了变量a，然后将1+3的运算结果赋值给变量a。</p>
+<p>1+3叫做表达式，指一个为了得到返回值的计算式。语句和表达式的区别在于，前者主要为了进行某种操作，一般不需要返回值；而后者就是为了得到返回值，一定会返回一个值。</p>
+<p>语句以分号结尾，一个分号就表示一个语句结束，多个语句可以写在一行内；表达式不需要分号结尾，一旦在表达式后面添加分号，JavaScript就将表达式视为语句，这样会产生一些没有任何意义的语句。</p>
+<hr>
+<h2 id="2标识符的规则">2.标识符的规则</h2>
+<p>标识符指的是用来识别各种值的合法名称。最常见的标识符就是变量名，以及后面要提到的函数名。JavaScript 语言的标识符对大小写敏感，所以a和A是两个不同的标识符。</p>
+<p>规则：</p>
+<ol>
+<li>第一个字符，可以使Unicode字母或者$或_或中文。</li>
+<li>后面的字符，除了上面所说，还可以有数字。</li>
+<li>一般标识符就是取名字的时候用到的符号。</li>
+</ol>
+<hr>
+<h2 id="3if-else-语句">3.if else 语句</h2>
+<ul>
+<li>语法</li>
+</ul>
+<ol>
+<li>if(表达式）{语句1}else{语句2}。（意思是如果表达式成立，那么语句1就执行，如果表达式不成立，语句2就执行）</li>
+<li>{}在语句只有一句的时候可以省略，不过不建议这样做，容易出bug。</li>
+</ol>
+<p>常用写法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">if(表达式){
+</span></span><span class="line"><span class="cl">    语句
+</span></span><span class="line"><span class="cl">}else if (表达式){
+</span></span><span class="line"><span class="cl">    语句
+</span></span><span class="line"><span class="cl">}else{
+</span></span><span class="line"><span class="cl">    语句
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="4while-for-语句">4.while for 语句</h2>
+<h3 id="while循环">while循环</h3>
+<ul>
+<li>语法</li>
+</ul>
+<p>while(表达式){语句}</p>
+<ul>
+<li>作用及运行</li>
+</ul>
+<ol>
+<li>判断表达式的真假。</li>
+<li>当表达式为真，执行语句，执行完再判断表达式的真假。</li>
+<li>当表达式为假，执行后面的语句。</li>
+</ol>
+<p>while(true){}是个死循环，不要用，用了会让浏览器崩溃。</p>
+<h3 id="for循环">for循环</h3>
+<ul>
+<li>语法</li>
+</ul>
+<p>for(语句1（var a = 0.1）；表达式2(a ! == 1)；语句3(a = a + 0.1){</p>
+<p>循环体</p>
+<p>}</p>
+<hr>
+<h2 id="5break-continue">5.break continue</h2>
+<p>break语句和continue语句都具有跳转作用，可以让代码不按既有的顺序执行。</p>
+<p>break语句用于跳出代码块或循环；continue语句用于立即终止本轮循环，返回循环结构的头部，开始下一轮循环。</p>
+<hr>
+<h2 id="6label">6.label</h2>
+<p>JavaScript 语言允许，语句的前面有标签（label），相当于定位符，用于跳转到程序的任意位置，标签的格式如下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">label:
+</span></span><span class="line"><span class="cl">     语句
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>标签可以是任意的标识符，但不能是保留字，语句部分可以是任意语句。</p>
+<p>标签通常与break语句和continue语句配合使用，跳出特定的循环</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-04-19</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/javascript%E7%AC%94%E8%AE%B0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://zhengkanghao.cn/javascript%E7%AC%94%E8%AE%B0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" data-title="JavaScript笔记——基本语法"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://zhengkanghao.cn/javascript%E7%AC%94%E8%AE%B0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://zhengkanghao.cn/javascript%E7%AC%94%E8%AE%B0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" data-title="JavaScript笔记——基本语法"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://zhengkanghao.cn/javascript%E7%AC%94%E8%AE%B0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" data-title="JavaScript笔记——基本语法"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://zhengkanghao.cn/javascript%E7%AC%94%E8%AE%B0%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" data-title="JavaScript笔记——基本语法"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E7%BD%91%E6%99%AF%E4%B8%8Ejavascript%E7%9A%84%E5%8E%86%E5%8F%B2/" class="prev" rel="prev" title="网景与JavaScript的历史"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>网景与JavaScript的历史</a>
+            <a href="/js%E5%AF%B9%E8%B1%A1%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/" class="next" rel="next" title="JaJS对象基本用法">JaJS对象基本用法<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

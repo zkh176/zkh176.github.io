@@ -1,138 +1,110 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    
-    <title>浅析Vue | 浅岸的博客</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="Vue的两个版本 vue有两个版本，分别是完整版（Vue.js）和非完整版（vue.runtime.js），两者的区别： 两个版本推荐使用非完整版，然后配合vue-loader和vue文件使用。
-template 和 render 怎么用 用template——html的方式做渲染 完整版的vue必须使用template。
-用创建一个加1的代码举例：
-new Vue({ data: { n: 0, }, template: ` &lt;div id=&#34;app&#34;&gt; &lt;p&gt;{{ n }}&lt;/p&gt; &lt;button @click=&#34;add&#34;&gt;&#43;1&lt;/button&gt; &lt;/div&gt; `, methods: { add() { this.n &#43;= 1; }, }, }).$mount(&#39;#app&#39;); render——js的方式做渲染 非完整版需要用render写法，用 const h = creatElement创建一个标签。 用同样的代码举例：
-new Vue({ el:&#39;#app&#39;, data:{ n:0, }, //用js创建一段HTML render(h){ return h(&#39;div&#39;,[ this.n, h( &#39;button&#39;, { on:{ click:this.add, }, }, &#39;&#43;1&#39;, ), ]); }, methods:{ add(){ this.n &#43;=1; }, }, }); 有时候人在外面没电脑，但是急需要写个vue代码，怎么办呢？ 用codesandbox.">
-    <meta name="generator" content="Hugo 0.97.3" />
-    
-    
-    
-    
-      <meta name="robots" content="noindex, nofollow">
-    
-
-    
-<link rel="stylesheet" href="/ananke/css/main.min.css" >
-
-
-
-    
-    
-    
-      
-
-    
-
-    
-    
-    <meta property="og:title" content="浅析Vue" />
-<meta property="og:description" content="Vue的两个版本 vue有两个版本，分别是完整版（Vue.js）和非完整版（vue.runtime.js），两者的区别： 两个版本推荐使用非完整版，然后配合vue-loader和vue文件使用。
-template 和 render 怎么用 用template——html的方式做渲染 完整版的vue必须使用template。
-用创建一个加1的代码举例：
-new Vue({ data: { n: 0, }, template: ` &lt;div id=&#34;app&#34;&gt; &lt;p&gt;{{ n }}&lt;/p&gt; &lt;button @click=&#34;add&#34;&gt;&#43;1&lt;/button&gt; &lt;/div&gt; `, methods: { add() { this.n &#43;= 1; }, }, }).$mount(&#39;#app&#39;); render——js的方式做渲染 非完整版需要用render写法，用 const h = creatElement创建一个标签。 用同样的代码举例：
-new Vue({ el:&#39;#app&#39;, data:{ n:0, }, //用js创建一段HTML render(h){ return h(&#39;div&#39;,[ this.n, h( &#39;button&#39;, { on:{ click:this.add, }, }, &#39;&#43;1&#39;, ), ]); }, methods:{ add(){ this.n &#43;=1; }, }, }); 有时候人在外面没电脑，但是急需要写个vue代码，怎么办呢？ 用codesandbox." />
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>浅析Vue - 浅岸的博客</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="浅析Vue" />
+<meta property="og:description" content="Vue的两个版本 vue有两个版本，分别是完整版（Vue.js）和非完整版（vue.runtime.js），两者的区别： 两个版本推荐使用非完整" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://zkh176.github.io/posts/%E6%B5%85%E6%9E%90vue/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="http://example.org/posts/%E6%B5%85%E6%9E%90vue/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-19T17:46:43+08:00" />
-<meta property="article:modified_time" content="2022-04-19T17:46:43+08:00" />
+<meta property="article:modified_time" content="2022-04-19T17:46:43+08:00" /><meta property="og:site_name" content="My cool site" />
 
-<meta itemprop="name" content="浅析Vue">
-<meta itemprop="description" content="Vue的两个版本 vue有两个版本，分别是完整版（Vue.js）和非完整版（vue.runtime.js），两者的区别： 两个版本推荐使用非完整版，然后配合vue-loader和vue文件使用。
-template 和 render 怎么用 用template——html的方式做渲染 完整版的vue必须使用template。
-用创建一个加1的代码举例：
-new Vue({ data: { n: 0, }, template: ` &lt;div id=&#34;app&#34;&gt; &lt;p&gt;{{ n }}&lt;/p&gt; &lt;button @click=&#34;add&#34;&gt;&#43;1&lt;/button&gt; &lt;/div&gt; `, methods: { add() { this.n &#43;= 1; }, }, }).$mount(&#39;#app&#39;); render——js的方式做渲染 非完整版需要用render写法，用 const h = creatElement创建一个标签。 用同样的代码举例：
-new Vue({ el:&#39;#app&#39;, data:{ n:0, }, //用js创建一段HTML render(h){ return h(&#39;div&#39;,[ this.n, h( &#39;button&#39;, { on:{ click:this.add, }, }, &#39;&#43;1&#39;, ), ]); }, methods:{ add(){ this.n &#43;=1; }, }, }); 有时候人在外面没电脑，但是急需要写个vue代码，怎么办呢？ 用codesandbox."><meta itemprop="datePublished" content="2022-04-19T17:46:43+08:00" />
-<meta itemprop="dateModified" content="2022-04-19T17:46:43+08:00" />
-<meta itemprop="wordCount" content="86">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="浅析Vue"/>
-<meta name="twitter:description" content="Vue的两个版本 vue有两个版本，分别是完整版（Vue.js）和非完整版（vue.runtime.js），两者的区别： 两个版本推荐使用非完整版，然后配合vue-loader和vue文件使用。
-template 和 render 怎么用 用template——html的方式做渲染 完整版的vue必须使用template。
-用创建一个加1的代码举例：
-new Vue({ data: { n: 0, }, template: ` &lt;div id=&#34;app&#34;&gt; &lt;p&gt;{{ n }}&lt;/p&gt; &lt;button @click=&#34;add&#34;&gt;&#43;1&lt;/button&gt; &lt;/div&gt; `, methods: { add() { this.n &#43;= 1; }, }, }).$mount(&#39;#app&#39;); render——js的方式做渲染 非完整版需要用render写法，用 const h = creatElement创建一个标签。 用同样的代码举例：
-new Vue({ el:&#39;#app&#39;, data:{ n:0, }, //用js创建一段HTML render(h){ return h(&#39;div&#39;,[ this.n, h( &#39;button&#39;, { on:{ click:this.add, }, }, &#39;&#43;1&#39;, ), ]); }, methods:{ add(){ this.n &#43;=1; }, }, }); 有时候人在外面没电脑，但是急需要写个vue代码，怎么办呢？ 用codesandbox."/>
+<meta name="twitter:description" content="Vue的两个版本 vue有两个版本，分别是完整版（Vue.js）和非完整版（vue.runtime.js），两者的区别： 两个版本推荐使用非完整"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/%E6%B5%85%E6%9E%90vue/" /><link rel="prev" href="http://example.org/posts/mvc%E5%B0%8F%E7%BB%93/" /><link rel="next" href="http://example.org/posts/vue%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E7%90%86%E8%A7%A3%E7%AC%94%E8%AE%B0/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "浅析Vue",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/%E6%B5%85%E6%9E%90vue\/"
+        },"genre": "posts","wordcount":  452 ,
+        "url": "http:\/\/example.org\/posts\/%E6%B5%85%E6%9E%90vue\/","datePublished": "2022-04-19T17:46:43+08:00","dateModified": "2022-04-19T17:46:43+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "浅岸"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
-	
-  </head>
-
-  <body class="ma0 avenir bg-near-white">
-
-    
-   
-  
-
-  <header>
-    <div class="bg-black">
-      <nav class="pv3 ph3 ph4-ns" role="navigation">
-  <div class="flex-l justify-between items-center center">
-    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
-      
-        浅岸的博客
-      
-    </a>
-    <div class="flex-l items-center">
-      
-
-      
-      
-<div class="ananke-socials">
-  
-</div>
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="浅岸的博客">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
-</nav>
-
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="浅岸的博客">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
     </div>
-  </header>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">浅析Vue</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>浅岸</a>
+</span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-04-19">2022-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;452 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#vue有两个版本分别是完整版vuejs和非完整版vueruntimejs两者的区别">vue有两个版本，分别是完整版（Vue.js）和非完整版（vue.runtime.js），两者的区别：</a></li>
+      </ul>
+    </li>
+  </ul>
 
+  <ul>
+    <li><a href="#用templatehtml的方式做渲染">用template——html的方式做渲染</a></li>
+    <li><a href="#renderjs的方式做渲染">render——js的方式做渲染</a></li>
+  </ul>
 
-
-    <main class="pb7" role="main">
-      
-  
-  <article class="flex-l flex-wrap justify-between mw8 center ph3">
-    <header class="mt4 w-100">
-      <aside class="instapaper_ignoref b helvetica tracked">
-          
-        POSTS
-      </aside>
-      
-
-
-
-
-
-
-
-
-
-
-  <div id="sharing" class="mt3 ananke-socials">
-    
-  </div>
-
-
-      <h1 class="f1 athelas mt3 mb1">浅析Vue</h1>
-      
-      
-      
-      <time class="f6 mv4 dib tracked" datetime="2022-04-19T17:46:43+08:00">April 19, 2022</time>
-      
-
-      
-      
-    </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h1 id="vue的两个版本">Vue的两个版本</h1>
+  <ul>
+    <li><a href="#用codesandboxio就可以很方便的写代码">用codesandbox.io就可以很方便的写代码。</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="vue的两个版本">Vue的两个版本</h1>
 <h3 id="vue有两个版本分别是完整版vuejs和非完整版vueruntimejs两者的区别">vue有两个版本，分别是完整版（Vue.js）和非完整版（vue.runtime.js），两者的区别：</h3>
-<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/838b926fcce44de1959f80b0c9c457b3~tplv-k3u1fbpfcp-watermark.image?" alt="1jpg.jpg"></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/838b926fcce44de1959f80b0c9c457b3~tplv-k3u1fbpfcp-watermark.image?"
+        data-srcset="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/838b926fcce44de1959f80b0c9c457b3~tplv-k3u1fbpfcp-watermark.image?, https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/838b926fcce44de1959f80b0c9c457b3~tplv-k3u1fbpfcp-watermark.image? 1.5x, https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/838b926fcce44de1959f80b0c9c457b3~tplv-k3u1fbpfcp-watermark.image? 2x"
+        data-sizes="auto"
+        alt="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/838b926fcce44de1959f80b0c9c457b3~tplv-k3u1fbpfcp-watermark.image?"
+        title="1jpg.jpg" /></p>
 <p>两个版本推荐使用非完整版，然后配合vue-loader和vue文件使用。</p>
 <h1 id="template-和-render-怎么用">template 和 render 怎么用</h1>
 <h2 id="用templatehtml的方式做渲染">用template——html的方式做渲染</h2>
@@ -187,44 +159,63 @@ new Vue({ el:&#39;#app&#39;, data:{ n:0, }, //用js创建一段HTML render(h){ r
 </code></pre><h1 id="有时候人在外面没电脑但是急需要写个vue代码怎么办呢">有时候人在外面没电脑，但是急需要写个vue代码，怎么办呢？</h1>
 <h2 id="用codesandboxio就可以很方便的写代码">用codesandbox.io就可以很方便的写代码。</h2>
 <p><strong>第一步</strong>
-<img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/363b13896c074a8b85ec324124d37d4f~tplv-k3u1fbpfcp-watermark.image?" alt="微信截图_20220215185635.png">
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/363b13896c074a8b85ec324124d37d4f~tplv-k3u1fbpfcp-watermark.image?"
+        data-srcset="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/363b13896c074a8b85ec324124d37d4f~tplv-k3u1fbpfcp-watermark.image?, https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/363b13896c074a8b85ec324124d37d4f~tplv-k3u1fbpfcp-watermark.image? 1.5x, https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/363b13896c074a8b85ec324124d37d4f~tplv-k3u1fbpfcp-watermark.image? 2x"
+        data-sizes="auto"
+        alt="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/363b13896c074a8b85ec324124d37d4f~tplv-k3u1fbpfcp-watermark.image?"
+        title="微信截图_20220215185635.png" />
 点击Vue图标就可以直接创建。
 tips：不要登录，登录了就只能用50个demo，不创建就能一直用。</p>
 <p><strong>第二步</strong>
-<img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a0a6dcda0ddf44879928d29fff283137~tplv-k3u1fbpfcp-watermark.image?" alt="2.png">
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a0a6dcda0ddf44879928d29fff283137~tplv-k3u1fbpfcp-watermark.image?"
+        data-srcset="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a0a6dcda0ddf44879928d29fff283137~tplv-k3u1fbpfcp-watermark.image?, https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a0a6dcda0ddf44879928d29fff283137~tplv-k3u1fbpfcp-watermark.image? 1.5x, https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a0a6dcda0ddf44879928d29fff283137~tplv-k3u1fbpfcp-watermark.image? 2x"
+        data-sizes="auto"
+        alt="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a0a6dcda0ddf44879928d29fff283137~tplv-k3u1fbpfcp-watermark.image?"
+        title="2.png" />
 直接再界面进行操作和编辑。</p>
 <p><strong>第三部</strong>
 如果想下载就可以点击左上角的file然后点击 Export to ZIP就可以导出写的代码啦。</p>
-<ul class="pa0">
-  
-</ul>
-<div class="mt6 instapaper_ignoref">
-      
-      
-      </div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-04-19</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/posts/%E6%B5%85%E6%9E%90vue/" data-title="浅析Vue"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/posts/%E6%B5%85%E6%9E%90vue/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/posts/%E6%B5%85%E6%9E%90vue/" data-title="浅析Vue"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/posts/%E6%B5%85%E6%9E%90vue/" data-title="浅析Vue"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@6.20.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/posts/%E6%B5%85%E6%9E%90vue/" data-title="浅析Vue"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
     </div>
 
-    <aside class="w-30-l mt6-l">
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
 
+    <div class="post-nav"><a href="/posts/mvc%E5%B0%8F%E7%BB%93/" class="prev" rel="prev" title="MVC小结"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>MVC小结</a>
+            <a href="/posts/vue%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E7%90%86%E8%A7%A3%E7%AC%94%E8%AE%B0/" class="next" rel="next" title="Vue响应式数据的理解笔记">Vue响应式数据的理解笔记<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.97.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">浅岸</a></span></div>
+        </div>
+    </footer></div>
 
-
-
-</aside>
-
-  </article>
-
-    </main>
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://zkh176.github.io/" >
-    &copy;  浅岸的博客 2022 
-  </a>
-    <div>
-<div class="ananke-socials">
-  
-</div></div>
-  </div>
-</footer>
-
-  </body>
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.1/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>
